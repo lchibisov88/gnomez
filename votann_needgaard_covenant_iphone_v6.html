@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#080d0c" name="theme-color"/>
+<title>Needgaârd Oathband + Hearthguard Covenant</title>
+<style>
+:root{
+  --bg:#080d0c; --surface:#0d1513; --card:#111918; --card2:#17211f; --ink:#edf5f0; --muted:#a9b9b2;
+  --line:#263733; --line2:#38504a; --green:#00a779; --green2:#0b6f59; --blue:#0d6a92; --gold:#d9bd64; --red:#bd604e;
+  --shadow:0 10px 28px rgba(0,0,0,.34); --radius:16px; --phone:440px; --stickyTop:env(safe-area-inset-top);
+}
+*{box-sizing:border-box}
+html{background:var(--bg); scroll-behavior:auto;}
+body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at 50% -80px,#17372f 0,#080d0c 360px);}
+.app{width:min(100vw,var(--phone));margin:0 auto;padding:env(safe-area-inset-top) 10px calc(26px + env(safe-area-inset-bottom));}
+.hero{margin:10px 0 8px;background:linear-gradient(145deg,#111917,#182724);border:1px solid #2c443e;border-radius:22px;padding:14px;box-shadow:var(--shadow)}
+.kicker{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.13em;font-weight:900}
+h1{font-size:21px;line-height:1.05;margin:6px 0 4px;letter-spacing:-.02em}
+.sub{font-size:12px;color:var(--muted);line-height:1.35}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.meta div{background:#0b1211;border:1px solid #23342f;border-radius:13px;padding:8px}
+.meta b{display:block;font-size:9px;color:#82928b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}.meta span{font-size:12px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.badge{font-size:10px;font-weight:800;color:#d8fff4;background:#0b2b25;border:1px solid #1d594c;border-radius:999px;padding:5px 8px}
+.stickybar{position:sticky;top:0;z-index:50;margin:0 -10px 12px;padding:7px 10px 9px;background:linear-gradient(to bottom,rgba(8,13,12,.98),rgba(8,13,12,.90));backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.sticky-row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:7px}.army-chip{font-size:11px;color:#cfe6dc;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.yp-mini{display:flex;align-items:center;gap:5px;background:#101917;border:1px solid #2a3f39;border-radius:12px;padding:4px 5px}.yp-mini span{font-size:10px;color:#9dafaa;text-transform:uppercase;letter-spacing:.07em;font-weight:900}.yp-mini button{width:26px;height:26px;border-radius:9px;border:1px solid #334a43;background:#18231f;color:var(--ink);font-size:17px;font-weight:950;line-height:1}.yp-mini b{min-width:24px;text-align:center;font-size:16px;color:var(--gold)}
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.tab{appearance:none;border:1px solid #2c403b;background:#13201d;color:#dce9e3;border-radius:999px;padding:10px 6px;font-size:13px;font-weight:950;letter-spacing:.01em}.tab.active{background:linear-gradient(180deg,#00a779,#08745d);border-color:#39c9a9;color:#06100d;box-shadow:inset 0 1px rgba(255,255,255,.35),0 5px 18px rgba(0,167,121,.20)}
+.toolrow{display:flex;gap:7px;align-items:center;margin:0 0 10px}.toolrow button{appearance:none;border:1px solid #2d403b;background:#111b19;color:#d9e6e1;border-radius:12px;padding:7px 10px;font-size:11px;font-weight:900}.toolrow small{color:#7f908a;font-size:10px;margin-left:auto;text-align:right}
+.tab-panel[hidden]{display:none}.section-title{margin:17px 2px 8px;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:#eaf2ed}.section-title:before{content:"";width:6px;height:18px;border-radius:5px;background:var(--green)}.section-note{font-size:12px;line-height:1.42;color:#aebeb7;margin:0 2px 10px}
+details{overflow:hidden}summary{list-style:none;cursor:pointer;user-select:none}summary::-webkit-details-marker{display:none}.panel,.strat,.unit{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}.panel>summary,.unit>summary{padding:12px 13px;display:flex;justify-content:space-between;gap:10px;align-items:center;background:linear-gradient(90deg,#111916,#14231f)}.panel>summary span,.unit-title{font-weight:950;letter-spacing:.01em}.panel>summary em{font-style:normal;color:#08100e;background:var(--green);padding:4px 7px;border-radius:8px;font-size:10px;font-weight:950;white-space:nowrap}.panel:not([open])>summary,.unit:not([open])>summary,.strat:not([open])>summary{border-radius:var(--radius)}.panel-body,.unit-body{padding:0 12px 13px;border-top:1px solid rgba(255,255,255,.06)}p{font-size:13px;line-height:1.45;color:#d8e2dd;margin:10px 0}.strat>summary{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:11px 12px;background:linear-gradient(90deg,#101816,#102c27)}.strat.core>summary{background:linear-gradient(90deg,#101816,#22240f)}.strat.cov>summary{background:linear-gradient(90deg,#101a20,#0b3246)}.strat-name{font-weight:950;text-transform:uppercase;letter-spacing:.04em;font-size:13px}.cost{background:#e9eee8;color:#080e0d;font-weight:950;padding:4px 8px;border-radius:9px}.mini-tag{display:inline-block;margin:10px 12px 0;padding:4px 7px;background:#063d31;border:1px solid #0b6d56;color:#abfff0;border-radius:8px;font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.07em}.strat.core .mini-tag{background:#39330b;border-color:#7d6815;color:#ffe99d}.strat.cov .mini-tag{background:#0b3447;border-color:#0d6a92;color:#c8f2ff}.strat p{padding:0 12px 12px;margin:8px 0 0}.unit>summary{display:block;position:relative;padding-right:34px}.unit>summary:after,.panel>summary:after,.strat>summary:after{content:"⌄";position:absolute;right:12px;top:50%;transform:translateY(-50%) rotate(0deg);font-weight:950;color:#8aa098}.panel>summary,.strat>summary{position:relative;padding-right:34px}details[open]>summary:after{transform:translateY(-50%) rotate(180deg)}.unit-meta{display:block;color:var(--muted);font-size:11px;font-weight:700;margin-top:4px}.unit-meta b{color:var(--gold)}.role-line{margin-top:10px}.role{display:inline-block;background:#231b0e;color:#f2dc9a;border:1px solid #5d4b22;padding:4px 8px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:950}.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}.stat-grid div{background:#0c1211;border:1px solid #23322f;border-radius:11px;padding:7px;text-align:center}.stat-grid b{display:block;font-size:9px;color:#859790;text-transform:uppercase}.stat-grid span{font-size:14px;font-weight:950}.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{font-size:11px;color:#dce7e1;background:#0c1413;border:1px solid #2b3a37;border-radius:999px;padding:5px 8px}h4{font-size:11px;color:#9eb0a8;text-transform:uppercase;letter-spacing:.09em;margin:13px 0 7px}.weapon-list{display:grid;gap:8px;margin:6px 0 0}.weapon-card{border:1px solid #263733;border-radius:14px;background:#0b1110;padding:8px;overflow:hidden}.weapon-name{font-size:13px;font-weight:950;line-height:1.18;margin:0 0 7px;color:#f2faf6}.weapon-profile{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}.weapon-profile div{background:#111a18;border:1px solid #22332f;border-radius:9px;min-width:0;padding:5px 2px;text-align:center}.weapon-profile b{display:block;font-size:8px;color:#93a59e;text-transform:uppercase;letter-spacing:.06em;line-height:1}.weapon-profile span{display:block;margin-top:3px;font-size:12px;font-weight:950;color:#edf5f0;white-space:nowrap;line-height:1.05}.weapon-keywords{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}.weapon-keywords span{font-size:10px;font-weight:800;color:#d9f4eb;background:#12221f;border:1px solid #2b443e;border-radius:999px;padding:4px 6px;line-height:1.1}.weapon-keywords.empty span{color:#7f908a;background:#0c1413;border-color:#1f302c}@media(max-width:370px){.weapon-profile{grid-template-columns:repeat(3,minmax(0,1fr))}}.abilities{padding-left:18px;margin:8px 0 0}.abilities li{font-size:12px;line-height:1.38;color:#d7e2dd;margin:5px 0}.footer{color:#8a9b95;font-size:10px;line-height:1.45;margin:18px 2px 4px;padding:12px;border:1px solid #22322f;border-radius:14px;background:#0d1413}.source-list{font-size:11px;color:#9fb2aa;margin-top:8px}.source-list li{margin:4px 0}@media (min-width:600px){.app{border-left:1px solid #16201e;border-right:1px solid #16201e;min-height:100vh}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div aria-label="Play-aid tabs" class="stickybar" role="navigation">
+<div class="sticky-row">
+<div class="army-chip">LoV · Needgaârd + Covenant</div>
+<div class="yp-mini"><span>YP</span><button aria-label="Decrease Yield Points" data-yp="-1" type="button">−</button><b id="ypVal">0</b><button aria-label="Increase Yield Points" data-yp="1" type="button">+</button></div>
+</div>
+<div aria-label="Main sections" class="tabs" role="tablist">
+<button class="tab" data-tab="rules" role="tab" type="button">Rules</button>
+<button class="tab" data-tab="strats" role="tab" type="button">Stratagems</button>
+<button class="tab" data-tab="units" role="tab" type="button">Units</button>
+</div>
+</div>
+<div class="toolrow"><button id="collapseActive" type="button">Collapse / Expand tab</button><button id="topBtn" type="button">Top</button><small>Tab and scroll positions are saved locally.</small></div>
+<section class="tab-panel" data-panel="rules" id="rules">
+<h2 class="section-title">Detachment / Army Rules</h2>
+<p class="section-note">All text is kept in English for table reference. Covenant entries below are the rules visible on your photo.</p>
+<details class="panel" open="">
+<summary><span>Stratagem limit · 11th Edition reminder</span><em>CORE</em></summary>
+<div class="panel-body">
+<p>Each Stratagem can only be used once per phase. In 11th Edition, a unit can only be targeted by one Stratagem per phase.</p>
+<p>Practical note: if a Hearthguard brick uses <b>Fury of the Hearth</b>, it cannot also be the target of another Stratagem in that same phase.</p>
+</div>
+</details>
+<details class="panel" open="">
+<summary><span>Army Rule · Prioritised Efficiency / Yield Points</span><em>CORE</em></summary>
+<div class="panel-body">
+<p><b>Yield Points (YP).</b> At the end of each player's Command phase, you gain 1YP for controlling one or more objective markers within your deployment zone. From the second battle round onwards, you also gain 1YP for controlling one or more objective markers outside your deployment zone, 1YP for controlling two or more objective markers outside your deployment zone, and 1YP if you control more objective markers than your opponent controls. Your YP total cannot be reduced below 0.</p>
+<p><b>Hostile Acquisition.</b> While active, attacks made by your units that target an enemy unit within range of an objective marker have +1 to Hit. You can also re-roll Advance rolls and Charge rolls for your units.</p>
+<p><b>Fortify Takeover.</b> While active, attacks made by your units have +1 to Hit if the attacking unit is within range of an objective marker you control. In addition, each time an attack targets one of your non-VEHICLE units, if the attack's Strength is greater than that unit's Toughness, subtract 1 from the Wound roll.</p>
+<p><b>Switching mode.</b> You start the battle in Hostile Acquisition. At the end of your Command phase, if you have 7+YP, Fortify Takeover is active until the start of your next Command phase; otherwise Hostile Acquisition remains active.</p>
+</div>
+</details>
+<details class="panel" open="">
+<summary><span>Needgaârd Oathband · Martial Leverage</span><em>NEEDGAÂRD</em></summary>
+<div class="panel-body">
+<p><b>Detachment Rule.</b> Each time an enemy unit is destroyed, you gain 1YP.</p>
+<p><b>How this list uses it.</b> Hekaton Land Fortresses, Thunderkyn and Einhyr Hearthguard are the main kill-conversion pieces. Once you reach 7+YP, Fortify Takeover unlocks the defensive layer for the castle and enables the strongest Needgaârd reactive tools.</p>
+</div>
+</details>
+<details class="panel" open="">
+<summary><span>Needgaârd Enhancements</span><em>ENHANCEMENTS</em></summary>
+<div class="panel-body">
+<p><b>Oathbound Speculator · Kâhl · in this army.</b> The bearer's unit can re-roll Wound rolls of 1. When the bearer's unit is selected to shoot or fight, you can spend 3YP; until the end of the phase, add 1 to Wound rolls for attacks made by models in that unit.</p>
+<p><b>Dead Reckoning.</b> At the end of your turn, if the bearer is on the battlefield and you did not spend any YP this turn, gain 1YP.</p>
+<p><b>Ancestral Crest.</b> Once per turn, when the bearer's unit uses the Command Re-roll Stratagem, you can spend 1YP to reduce that Stratagem's CP cost by 1.</p>
+<p><b>Iron Ambassador.</b> Autoch-pattern combi-bolter only. Once per battle, when the bearer's unit shoots, you can spend up to 3YP and add the number of YP spent to the Damage characteristic of the bearer's ranged weapons until the end of the phase.</p>
+</div>
+</details>
+<details class="panel" open="">
+<summary><span>Hearthguard Covenant · Avatars of the Ancestors</span><em>COVENANT</em></summary>
+<div class="panel-body">
+<p><b>Detachment Rule.</b> Friendly KÂHL / EINHYR CHAMPION / EINHYR HEARTHGUARD / ÛTHAR THE DESTINED units' ranged attacks that target a unit within 9" can re-roll Wound rolls of 1.</p>
+<p><b>Restriction.</b> This detachment has the HEARTHGUARD tag and cannot be taken with another HEARTHGUARD detachment.</p>
+<p><b>High Kâhl.</b> KÂHL model only. In the Fight phase, when a model in this unit is destroyed, if this unit has not been selected to fight this phase, roll one D6; on a 4+, do not remove that model from the battlefield until after this unit has fought or the end of the phase, whichever comes first.</p>
+<p><b>Ironskein.</b> KÂHL model only. This model has +2W.</p>
+</div>
+</details>
+</section>
+<section class="tab-panel" data-panel="strats" hidden="" id="strats">
+<h2 class="section-title">Stratagems · Core Rules PDF only</h2>
+<p class="section-note">Only the Core Stratagems listed in the official 11th Edition Core Rules PDF are included here. Removed non-PDF / mission-pack extras such as New Orders, and removed 10th-edition names such as Grenade and Tank Shock. Remember: one Stratagem per target unit per phase.</p>
+<details class="strat core">
+<summary><span class="strat-name">Command Re-roll</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> Any phase, just after you make one of these rolls for a friendly unit or model: Advance, Charge, Damage, Hazard, Hit, Save, Wound, or a roll to determine the number of attacks generated with a weapon.</p>
+<p><b>Target:</b> That unit or model.</p>
+<p><b>Effect:</b> Re-roll that roll. If rolling multiple dice together, choose one die to re-roll, except Charge rolls, which are re-rolled in full.</p>
+</details>
+<details class="strat core">
+<summary><span class="strat-name">Epic Challenge</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> Fight phase, just after a friendly CHARACTER unit is selected to fight.</p>
+<p><b>Target:</b> That CHARACTER unit.</p>
+<p><b>Effect:</b> Select one CHARACTER model in your unit. Until the end of the phase, that model's melee weapons have PRECISION.</p>
+</details>
+<details class="strat core">
+<summary><span class="strat-name">Insane Bravery</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> Battle-shock step of your Command phase, just before you make a battle-shock roll for a friendly unit.</p>
+<p><b>Target:</b> That unit.</p>
+<p><b>Effect:</b> That battle-shock roll is automatically successful.</p>
+<p><b>Restriction:</b> Once per battle.</p>
+</details>
+<details class="strat core">
+<summary><span class="strat-name">Explosives</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> Your Shooting phase.</p>
+<p><b>Target:</b> One friendly unengaged EXPLOSIVES/GRENADES unit that is eligible to shoot and did not make an Advance move this turn.</p>
+<p><b>Effect:</b> Select one EXPLOSIVES/GRENADES model in your unit, then select one unengaged visible enemy unit within 8&quot; of that model. Roll six D6; each 4+ causes 1 mortal wound.</p>
+</details>
+<details class="strat core">
+<summary><span class="strat-name">Crushing Impact</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> Your Charge phase, just after a friendly MONSTER/VEHICLE unit ends a charge move.</p>
+<p><b>Target:</b> That MONSTER/VEHICLE unit.</p>
+<p><b>Effect:</b> Select one enemy unit engaged with your unit, then one model in your unit engaged with that enemy. Roll D6 equal to that model's Toughness. Each 1 deals 1 mortal wound to your unit; each 5+ deals 1 mortal wound to the enemy unit, max 6 mortal wounds per enemy unit.</p>
+</details>
+<details class="strat core">
+<summary><span class="strat-name">Rapid Ingress</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> End of your opponent's Movement phase.</p>
+<p><b>Target:</b> One friendly unit that is in Strategic Reserves, excluding AIRCRAFT.</p>
+<p><b>Effect:</b> Your unit makes an ingress move.</p>
+<p><b>Restriction:</b> Cannot be used during the first battle round.</p>
+</details>
+<details class="strat core">
+<summary><span class="strat-name">Fire Overwatch</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> End of your opponent's Movement phase.</p>
+<p><b>Target:</b> One friendly unengaged unit, excluding TITANIC units.</p>
+<p><b>Effect:</b> Your unit shoots using Snap Shooting.</p>
+<p><b>Snap Shooting:</b> Target one visible eligible enemy unit within 24&quot;. Attacks only hit on unmodified 6s and cannot re-roll Hit rolls. After shooting, your unit is not eligible to start an action until the end of the phase.</p>
+</details>
+<details class="strat core">
+<summary><span class="strat-name">Smokescreen</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> Start of your opponent's Shooting phase.</p>
+<p><b>Target:</b> One friendly SMOKE unit.</p>
+<p><b>Effect:</b> Until the end of the phase, attacks against that SMOKE unit, or against a unit not fully visible to the attacker because of one or more models in that SMOKE unit, treat the target as having the benefit of cover.</p>
+</details>
+<details class="strat core">
+<summary><span class="strat-name">Heroic Intervention</span><span class="cost">1CP/+1CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> End of your opponent's Charge phase.</p>
+<p><b>Target:</b> One friendly unengaged unit within 12&quot; of one or more enemy units. A VEHICLE target must be CHARACTER or WALKER.</p>
+<p><b>Effect:</b> Resolve a charge with your unit. Before the charge roll, choose: <b>Leap to Defend</b> - you can only select enemy units that made a charge move this phase and are within the maximum distance; or <b>Into the Fray</b> - pay +1CP, cap the charge roll at 6 after modifiers, and you can select any enemy units within 6&quot; and within the maximum distance.</p>
+</details>
+<details class="strat core">
+<summary><span class="strat-name">Counter-offensive</span><span class="cost">2CP</span></summary>
+<div class="mini-tag">Core</div>
+<p><b>When:</b> Fight step of your opponent's Fight phase, just after an enemy unit has resolved its attacks.</p>
+<p><b>Target:</b> One friendly unit that is eligible to fight.</p>
+<p><b>Effect:</b> Until the end of the phase, your unit has Fights First and must be the next unit you select to fight.</p>
+</details>
+<h2 class="section-title">Stratagems · Needgaârd</h2>
+<details class="strat">
+<summary><span class="strat-name">Ordered Retreat</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Needgaârd · Strategic Ploy</div>
+<p>Your Movement phase, just after a LEAGUES OF VOTANN unit from your army Falls Back. Until the end of the turn, that unit is eligible to shoot and declare a charge in a turn in which it Fell Back.</p>
+</details>
+<details class="strat">
+<summary><span class="strat-name">Void Hardened</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Needgaârd · Wargear</div>
+<p>Opponent's Shooting phase or Fight phase, just after an enemy unit selects targets, and only if Fortify Takeover is active. Target one LEAGUES OF VOTANN unit selected as a target. Until the end of the phase, worsen the AP of attacks that target your unit by 1.</p>
+</details>
+<details class="strat">
+<summary><span class="strat-name">Ancestral Sentence</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Needgaârd · Battle Tactic</div>
+<p>Your Shooting phase, when a LEAGUES OF VOTANN unit from your army is selected to shoot. Until the end of the phase, ranged weapons equipped by models in that unit have SUSTAINED HITS 1. If you spend 3YP, they have SUSTAINED HITS 2 instead.</p>
+</details>
+<details class="strat">
+<summary><span class="strat-name">Huntr's Mark</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Needgaârd · Battle Tactic</div>
+<p>Your Shooting phase, when a LEAGUES OF VOTANN unit from your army is selected to shoot. Until the end of the phase, re-roll Hit rolls of 1 and Wound rolls of 1 for ranged attacks made by models in that unit.</p>
+</details>
+<details class="strat">
+<summary><span class="strat-name">Reactive Reprisal</span><span class="cost">2CP</span></summary>
+<div class="mini-tag">Needgaârd · Strategic Ploy</div>
+<p>Opponent's Shooting phase, just after an enemy unit has shot, and only if Fortify Takeover is active. Target one LEAGUES OF VOTANN unit from your army that was selected as a target by that enemy unit. Your unit can shoot as if it were your Shooting phase, but can only target that enemy unit.</p>
+</details>
+<details class="strat">
+<summary><span class="strat-name">Honour of the Hold</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Needgaârd · Battle Tactic</div>
+<p>Fight phase, when a LEAGUES OF VOTANN unit from your army is selected to fight. Select one enemy unit within Engagement Range. Until the end of the phase, improve the AP of melee attacks made by your unit that target that enemy unit by 1. If you spend 3YP, improve AP by 2 instead.</p>
+</details>
+<h2 class="section-title">Stratagems · Hearthguard Covenant</h2>
+<details class="strat cov">
+<summary><span class="strat-name">Brëkkeknots</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Hearthguard Covenant</div>
+<p>Opponent's Shooting phase or Fight phase, when an enemy unit targets a friendly EINHYR HEARTHGUARD unit. Target that EINHYR HEARTHGUARD unit. Effect: your unit has 4+ InvSv.</p>
+</details>
+<details class="strat cov">
+<summary><span class="strat-name">Fury of the Hearth</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Hearthguard Covenant</div>
+<p>Your Shooting phase, when a friendly EINHYR HEARTHGUARD unit is selected to shoot. Target that unit. Its ranged attacks have +1S. If you spend 1YP, those attacks also have SUSTAINED HITS 1.</p>
+</details>
+<details class="strat cov">
+<summary><span class="strat-name">Materialisation Matrices</span><span class="cost">1CP</span></summary>
+<div class="mini-tag">Hearthguard Covenant</div>
+<p>Your Movement phase, when a friendly EINHYR HEARTHGUARD unit with Deep Strike is selected to make an ingress move. Target that unit. It can be set up anywhere on the battlefield more than 6" horizontally from all enemy units, even in your opponent's deployment zone. It is not eligible to declare a charge until the end of the turn.</p>
+</details>
+</section>
+<section class="tab-panel" data-panel="units" id="units">
+<h2 class="section-title">Unit Cards</h2>
+<p class="section-note">Identical units are combined. Open states are saved locally on this device.</p>
+<details class="unit" open="">
+<summary>
+<span class="unit-title">Ûthar the Destined</span>
+<span class="unit-meta"><b>1×</b> · 1 models · 95 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Character · Warlord</span></div>
+<div class="stat-grid"><div><b>M</b><span>5″</span></div><div><b>T</b><span>5</span></div><div><b>Sv</b><span>3+</span></div><div><b>W</b><span>5</span></div><div><b>Ld</b><span>6+</span></div><div><b>OC</b><span>1</span></div><div><b>Inv</b><span>4+</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">Blade of the Ancestors</span><span class="chip">Volkanite disintegrator</span><span class="chip">Rampart crest</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">Volkanite disintegrator</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>2+</span></div><div><b>S</b><span>5</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Devastating Wounds</span></div></div><div class="weapon-card"><div class="weapon-name">Blade of the Ancestors</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>5</span></div><div><b>SKL</b><span>2+</span></div><div><b>S</b><span>6</span></div><div><b>AP</b><span>-3</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords"><span>Devastating Wounds</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Leader: Einhyr Hearthguard, Hearthkyn Warriors.</li><li>Ancestral Fortune: 1/turn spend 1YP to change one Hit/Wound/save for this model to unmodified 6.</li><li>Grim Efficiency: 1/battle round, friendly LoV unit within 12″ targeted with Stratagem → reduce CP cost by 1.</li><li>Rampart Crest: while leading a unit, models in that unit have 5+ InvSv.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Kâhl</span>
+<span class="unit-meta"><b>1×</b> · 1 models · 95 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Character · Enhancement</span></div>
+<div class="stat-grid"><div><b>M</b><span>5″</span></div><div><b>T</b><span>5</span></div><div><b>Sv</b><span>3+</span></div><div><b>W</b><span>4</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>1</span></div><div><b>Inv</b><span>4+</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">Mass gauntlet</span><span class="chip">Volkanite disintegrator</span><span class="chip">Teleport crest</span><span class="chip">Oathbound Speculator (+30 pts)</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">Volkanite disintegrator</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>2+</span></div><div><b>S</b><span>5</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Devastating Wounds</span></div></div><div class="weapon-card"><div class="weapon-name">Mass gauntlet</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>3+</span></div><div><b>S</b><span>8</span></div><div><b>AP</b><span>-3</span></div><div><b>D</b><span>3</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Leader: Einhyr Hearthguard, Hearthkyn Warriors.</li><li>Kindred Hero: while leading, weapons in unit have Lethal Hits.</li><li>Seized Opportunity: 1/phase, when this unit destroys an enemy unit, gain 1YP.</li><li>Teleport Crest: while leading, unit has Deep Strike.</li><li>Oathbound Speculator: bearer’s unit re-rolls wound rolls of 1; spend 3YP when selected to shoot/fight → +1 to Wound until end phase.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Einhyr Champion</span>
+<span class="unit-meta"><b>1×</b> · 1 models · 70 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Character</span></div>
+<div class="stat-grid"><div><b>M</b><span>5″</span></div><div><b>T</b><span>5</span></div><div><b>Sv</b><span>2+</span></div><div><b>W</b><span>5</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>1</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">Autoch-pattern combi-bolter</span><span class="chip">Mass hammer</span><span class="chip">Teleport crest</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">Autoch-pattern combi-bolter</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>4</span></div><div><b>SKL</b><span>2+</span></div><div><b>S</b><span>4</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div><div class="weapon-card"><div class="weapon-name">Mass hammer</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>3+</span></div><div><b>S</b><span>12</span></div><div><b>AP</b><span>-3</span></div><div><b>D</b><span>D6+1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Leader: Einhyr Hearthguard.</li><li>Exemplar of the Einhyr: while leading, +1 to Advance and Charge rolls.</li><li>Mass Driver Accelerators: after Charge move, select enemy in Engagement Range; 2–5 = D3 MW, 6 = D3+3 MW.</li><li>Teleport Crest: while leading, unit has Deep Strike.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Hearthkyn Warriors</span>
+<span class="unit-meta"><b>1×</b> · 10 models · 100 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Battleline</span></div>
+<div class="stat-grid"><div><b>M</b><span>5″</span></div><div><b>T</b><span>5</span></div><div><b>Sv</b><span>4+</span></div><div><b>W</b><span>1</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>2</span></div><div><b>FNP</b><span>6+</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">Theyn: bolt pistol, bolter, CCW, Weavefield crest</span><span class="chip">7× Warrior: bolt pistol, bolter, CCW</span><span class="chip">1× HYLas auto rifle</span><span class="chip">1× Magna-rail rifle</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">Autoch-pattern bolt pistol</div><div class="weapon-profile"><div><b>RNG</b><span>12″</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>4</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Pistol</span></div></div><div class="weapon-card"><div class="weapon-name">Autoch-pattern bolter</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>4</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div><div class="weapon-card"><div class="weapon-name">HYLas auto rifle</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>6</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Assault</span><span>Rapid Fire 3</span></div></div><div class="weapon-card"><div class="weapon-name">Magna-rail rifle</div><div class="weapon-profile"><div><b>RNG</b><span>18″</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>5+</span></div><div><b>S</b><span>12</span></div><div><b>AP</b><span>-3</span></div><div><b>D</b><span>D3+3</span></div></div><div class="weapon-keywords"><span>Devastating Wounds</span><span>Heavy</span></div></div><div class="weapon-card"><div class="weapon-name">Close combat weapon</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>4</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Luck Has. Need Keeps. Toil Earns: sticky objective after controlling it at end of Command phase.</li><li>Panspectral Scanning: ranged attacks re-roll Hit rolls of 1.</li><li>Weavefield Crest: unit has 5+ InvSv.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Brôkhyr Thunderkyn · SP conversion beamers</span>
+<span class="unit-meta"><b>1×</b> · 6 models · 160 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Other Datasheet</span></div>
+<div class="stat-grid"><div><b>M</b><span>5″</span></div><div><b>T</b><span>6</span></div><div><b>Sv</b><span>3+</span></div><div><b>W</b><span>2</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>1</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">6× SP conversion beamer</span><span class="chip">6× Close combat weapon</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">SP conversion beamer</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>7</span></div><div><b>AP</b><span>-2</span></div><div><b>D</b><span>3</span></div></div><div class="weapon-keywords"><span>Conversion</span><span>Lethal Hits</span></div></div><div class="weapon-card"><div class="weapon-name">Close combat weapon</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>4</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Breaching Fire: after this unit shoots, select one enemy unit hit; until start of your next Shooting phase it cannot have Benefit of Cover.</li><li>Conversion: if target is not within 12″, unmodified successful Hit roll of 4+ scores a Critical Hit.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Brôkhyr Thunderkyn · Graviton blast cannons</span>
+<span class="unit-meta"><b>2× identical</b> · 3 models · 80 each pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Other Datasheet</span></div>
+<div class="stat-grid"><div><b>M</b><span>5″</span></div><div><b>T</b><span>6</span></div><div><b>Sv</b><span>3+</span></div><div><b>W</b><span>2</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>1</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">3× Graviton blast cannon</span><span class="chip">3× Close combat weapon</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">Graviton blast cannon</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>5</span></div><div><b>AP</b><span>-2</span></div><div><b>D</b><span>3</span></div></div><div class="weapon-keywords"><span>Anti-Monster 3+</span><span>Anti-Vehicle 3+</span></div></div><div class="weapon-card"><div class="weapon-name">Close combat weapon</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>4</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Breaching Fire: after this unit shoots, select one enemy unit hit; until start of your next Shooting phase it cannot have Benefit of Cover.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Einhyr Hearthguard · 10 plasma</span>
+<span class="unit-meta"><b>1×</b> · 10 models · 270 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Other Datasheet · Anvil</span></div>
+<div class="stat-grid"><div><b>M</b><span>5″</span></div><div><b>T</b><span>5</span></div><div><b>Sv</b><span>2+</span></div><div><b>W</b><span>2</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>1</span></div><div><b>Inv</b><span>5+</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">Hesyr: Graviton hammer, EtaCarn plasma gun, Exo-armour grenade launcher, Weavefield crest</span><span class="chip">9× Hearthguard: Concussion gauntlet, EtaCarn plasma gun, Exo-armour grenade launcher</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">EtaCarn plasma gun</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>3+</span></div><div><b>S</b><span>7</span></div><div><b>AP</b><span>-3</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords"><span>Rapid Fire 1</span></div></div><div class="weapon-card"><div class="weapon-name">Exo-armour grenade launcher</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>D3</span></div><div><b>SKL</b><span>3+</span></div><div><b>S</b><span>3</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Blast</span></div></div><div class="weapon-card"><div class="weapon-name">Concussion gauntlet</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>3+</span></div><div><b>S</b><span>8</span></div><div><b>AP</b><span>-2</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div><div class="weapon-card"><div class="weapon-name">Graviton hammer</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>9</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>3</span></div></div><div class="weapon-keywords"><span>Anti-Monster 3+</span><span>Anti-Vehicle 3+</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Decisive Destruction: ranged attacks into closest eligible target re-roll Hit rolls of 1.</li><li>Weavefield Crest: unit has 5+ InvSv.</li><li>Can be led by Ûthar / Kâhl / Einhyr Champion. With Kâhl: Lethal Hits; with Champion: +1 Advance/Charge + Deep Strike from crest.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Einhyr Hearthguard · 5 plasma</span>
+<span class="unit-meta"><b>1×</b> · 5 models · 135 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Other Datasheet · Drop/Utility</span></div>
+<div class="stat-grid"><div><b>M</b><span>5″</span></div><div><b>T</b><span>5</span></div><div><b>Sv</b><span>2+</span></div><div><b>W</b><span>2</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>1</span></div><div><b>Inv</b><span>5+</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">Hesyr: Concussion gauntlet, EtaCarn plasma gun, Exo-armour grenade launcher, Weavefield crest</span><span class="chip">4× Hearthguard: Concussion gauntlet, EtaCarn plasma gun, Exo-armour grenade launcher</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">EtaCarn plasma gun</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>3+</span></div><div><b>S</b><span>7</span></div><div><b>AP</b><span>-3</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords"><span>Rapid Fire 1</span></div></div><div class="weapon-card"><div class="weapon-name">Exo-armour grenade launcher</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>D3</span></div><div><b>SKL</b><span>3+</span></div><div><b>S</b><span>3</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Blast</span></div></div><div class="weapon-card"><div class="weapon-name">Concussion gauntlet</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>3+</span></div><div><b>S</b><span>8</span></div><div><b>AP</b><span>-2</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Decisive Destruction: ranged attacks into closest eligible target re-roll Hit rolls of 1.</li><li>Weavefield Crest: unit has 5+ InvSv.</li><li>Good Covenant target: Fury of the Hearth / Brëkkeknots / Materialisation Matrices.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Hekaton Land Fortress</span>
+<span class="unit-meta"><b>2× identical</b> · 1 models · 240 each pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Vehicle · Heavy</span></div>
+<div class="stat-grid"><div><b>M</b><span>10″</span></div><div><b>T</b><span>12</span></div><div><b>Sv</b><span>2+</span></div><div><b>W</b><span>16</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>5</span></div><div><b>DD</b><span>D6</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">Heavy magna-rail cannon</span><span class="chip">MATR autocannon</span><span class="chip">2× Twin bolt cannon</span><span class="chip">Pan spectral scanner</span><span class="chip">Armoured wheels</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">Heavy magna-rail cannon</div><div class="weapon-profile"><div><b>RNG</b><span>30″</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>18</span></div><div><b>AP</b><span>-4</span></div><div><b>D</b><span>D6+4</span></div></div><div class="weapon-keywords"><span>Devastating Wounds</span><span>Heavy</span></div></div><div class="weapon-card"><div class="weapon-name">MATR autocannon</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>6</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>7</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords"><span>Assault</span><span>Sustained Hits 1</span></div></div><div class="weapon-card"><div class="weapon-name">Twin bolt cannon</div><div class="weapon-profile"><div><b>RNG</b><span>36″</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>6</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords"><span>Sustained Hits 2</span><span>Twin-linked · 2× guns</span></div></div><div class="weapon-card"><div class="weapon-name">Armoured wheels</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>6</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>8</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>MultiCOG Targeting: ignore modifiers to BS and Hit rolls.</li><li>Pan spectral scanner: re-roll Hit rolls of 1.</li><li>Transport 14 LoV Infantry; Exo-armour/Exo-frame/Steeljacks count as 2; not Artillery.</li><li>Damaged 1–5W: subtract 1 from Hit rolls.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Hernkyn Pioneers</span>
+<span class="unit-meta"><b>2× identical</b> · 3 models · 80 each pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Mounted · Utility</span></div>
+<div class="stat-grid"><div><b>M</b><span>12″</span></div><div><b>T</b><span>6</span></div><div><b>Sv</b><span>4+</span></div><div><b>W</b><span>3</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>2</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">3× Bolt revolver, Bolt shotgun, Magna-coil autocannon, Plasma knife</span><span class="chip">1× Pan-spectral scanner</span><span class="chip">1× Rollbar searchlight</span><span class="chip">1× HYLas rotary cannon</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">Bolt revolver</div><div class="weapon-profile"><div><b>RNG</b><span>12″</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>5</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Pistol</span></div></div><div class="weapon-card"><div class="weapon-name">Bolt shotgun</div><div class="weapon-profile"><div><b>RNG</b><span>18″</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>5</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Assault</span></div></div><div class="weapon-card"><div class="weapon-name">Magna-coil autocannon</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>7</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div><div class="weapon-card"><div class="weapon-name">HYLas rotary cannon</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>6</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>6</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Sustained Hits 1</span></div></div><div class="weapon-card"><div class="weapon-name">Plasma knife</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>4</span></div><div><b>AP</b><span>-2</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Scouts 9″.</li><li>Outflanking Mag-riders: end of opponent turn, if wholly within 9″ of board edge and not in Engagement Range, remove and place in Strategic Reserves.</li><li>Pan-spectral scanner: re-roll ranged Hit rolls of 1.</li><li>Rollbar searchlight: ignore Hit roll modifiers.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Hernkyn Yaegirs</span>
+<span class="unit-meta"><b>1×</b> · 10 models · 90 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Infantry · Infiltrators</span></div>
+<div class="stat-grid"><div><b>M</b><span>6″</span></div><div><b>T</b><span>5</span></div><div><b>Sv</b><span>5+</span></div><div><b>W</b><span>1</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>1</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">Theyn: Bolt revolver, Plasma knife</span><span class="chip">7× Yaegir: Bolt revolver, Plasma knife, CCW</span><span class="chip">1× APM launcher</span><span class="chip">1× Magna-coil rifle</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">APM launcher</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>6</span></div><div><b>AP</b><span>-2</span></div><div><b>D</b><span>D6</span></div></div><div class="weapon-keywords"><span>Anti-Monster 3+</span><span>Anti-Vehicle 3+</span></div></div><div class="weapon-card"><div class="weapon-name">Bolt revolver</div><div class="weapon-profile"><div><b>RNG</b><span>12″</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>5</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords"><span>Pistol</span></div></div><div class="weapon-card"><div class="weapon-name">Magna-coil rifle</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>5</span></div><div><b>AP</b><span>-2</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords"><span>Ignores Cover</span><span>Precision</span></div></div><div class="weapon-card"><div class="weapon-name">Plasma knife</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>2</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>4</span></div><div><b>AP</b><span>-2</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div><div class="weapon-card"><div class="weapon-name">Close combat weapon</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>1</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>4</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Infiltrators.</li><li>Pragmatic Hunters: 1/turn when enemy ends Normal/Advance/Fall Back within 9″, this unit can make Normal move up to D6″.</li><li>Can start split into Kapricus Carrier if using Carrier split rule.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Kapricus Carrier</span>
+<span class="unit-meta"><b>1×</b> · 1 models · 75 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Dedicated Transport</span></div>
+<div class="stat-grid"><div><b>M</b><span>12″</span></div><div><b>T</b><span>7</span></div><div><b>Sv</b><span>4+</span></div><div><b>W</b><span>7</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>2</span></div><div><b>DD</b><span>1</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">Magna-coil autocannon</span><span class="chip">Twin magna-coil autocannon</span><span class="chip">Smoke launcher</span><span class="chip">Armoured hull</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">Magna-coil autocannon</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>7</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div><div class="weapon-card"><div class="weapon-name">Twin magna-coil autocannon</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>7</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords"><span>Twin-linked</span></div></div><div class="weapon-card"><div class="weapon-name">Armoured hull</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>6</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Firing Deck 5. Scouts 9″. Deadly Demise 1.</li><li>Scanner Uplinks: after shooting, select non-Monster/non-Vehicle enemy hit; until start of your next turn it is suppressed: each time it attacks, subtract 1 from Hit roll.</li><li>Smoke Launcher: has SMOKE keyword.</li><li>Transport 5 Hernkyn Yaegirs. At Declare Battle Formations can split one Yaegir unit; one half must start embarked.</li></ul>
+</div>
+</details><details class="unit" open="">
+<summary>
+<span class="unit-title">Sagitaur</span>
+<span class="unit-meta"><b>1×</b> · 1 models · 90 pts</span>
+</summary>
+<div class="unit-body">
+<div class="role-line"><span class="role">Dedicated Transport</span></div>
+<div class="stat-grid"><div><b>M</b><span>12″</span></div><div><b>T</b><span>9</span></div><div><b>Sv</b><span>3+</span></div><div><b>W</b><span>9</span></div><div><b>Ld</b><span>7+</span></div><div><b>OC</b><span>2</span></div><div><b>DD</b><span>1</span></div></div>
+<h4>Loadout</h4>
+<div class="chips"><span class="chip">MATR autocannon</span><span class="chip">Twin bolt cannon</span><span class="chip">Armoured wheels</span></div>
+<h4>Weapons</h4>
+<div class="weapon-list"><div class="weapon-card"><div class="weapon-name">MATR autocannon</div><div class="weapon-profile"><div><b>RNG</b><span>24″</span></div><div><b>A</b><span>6</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>7</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords"><span>Assault</span><span>Sustained Hits 1</span></div></div><div class="weapon-card"><div class="weapon-name">Twin bolt cannon</div><div class="weapon-profile"><div><b>RNG</b><span>36″</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>6</span></div><div><b>AP</b><span>-1</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords"><span>Sustained Hits 2</span><span>Twin-linked</span></div></div><div class="weapon-card"><div class="weapon-name">Armoured wheels</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>3</span></div><div><b>SKL</b><span>4+</span></div><div><b>S</b><span>6</span></div><div><b>AP</b><span>0</span></div><div><b>D</b><span>1</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div></div>
+<h4>Abilities / notes</h4>
+<ul class="abilities"><li>Deadly Demise 1.</li><li>Blistering Advance: units can disembark after this model Advanced; they count as having made Normal move, can act, cannot charge.</li><li>Transport 6 LoV Infantry; cannot transport Artillery / Exo-armour / Exo-frame / Ironkin Steeljacks.</li><li>At Declare Battle Formations can split one Hearthkyn Warriors unit; one half must start embarked.</li></ul>
+</div>
+</details>
+</section>
+<div class="footer">
+    Play-aid summary, not a rules authority. Check the latest Core Rules PDF, Faction Pack, Balance Dataslate and event pack before a game.
+    <ul class="source-list">
+<li>Core Stratagems: Warhammer 40,000 11th Edition Core Rules PDF only; no mission-pack extras.</li>
+<li>Leagues of Votann rules and datasheets: current Faction Pack / your roster.</li>
+<li>Hearthguard Covenant entries: extracted from the photo you provided.</li>
+</ul>
+</div>
+</div>
+<script>
+const store = window.localStorage;
+const ypVal = document.getElementById('ypVal');
+let yp = Number(store.getItem('votannYP') || 0);
+function drawYP(){ ypVal.textContent = yp; store.setItem('votannYP', String(yp)); }
+document.querySelectorAll('[data-yp]').forEach(b => b.addEventListener('click', () => { yp = Math.max(0, yp + Number(b.dataset.yp)); drawYP(); }));
+drawYP();
+
+const tabs = Array.from(document.querySelectorAll('.tab'));
+const panels = Array.from(document.querySelectorAll('.tab-panel'));
+let currentTab = store.getItem('votannActiveTab') || 'rules';
+const scrollKey = tab => `votannScroll:${tab}`;
+function saveScroll(){ store.setItem(scrollKey(currentTab), String(window.scrollY)); }
+function activateTab(tab, restore=true){
+  if (!panels.some(p => p.dataset.panel === tab)) tab = 'rules';
+  if (tab !== currentTab) saveScroll();
+  currentTab = tab;
+  store.setItem('votannActiveTab', tab);
+  tabs.forEach(t => { const active = t.dataset.tab === tab; t.classList.toggle('active', active); t.setAttribute('aria-selected', String(active)); });
+  panels.forEach(p => { p.hidden = p.dataset.panel !== tab; });
+  if (restore){
+    const y = Number(store.getItem(scrollKey(tab)) || 0);
+    requestAnimationFrame(() => window.scrollTo(0, y));
+  }
+}
+tabs.forEach(t => t.addEventListener('click', () => activateTab(t.dataset.tab)));
+activateTab(currentTab, true);
+window.addEventListener('beforeunload', saveScroll);
+document.addEventListener('visibilitychange', () => { if (document.hidden) saveScroll(); });
+
+function detailKey(d){
+  const s = d.querySelector('summary');
+  const txt = (s ? s.innerText : '').replace(/\s+/g,' ').trim();
+  return 'votannOpen:' + txt.slice(0,80);
+}
+document.querySelectorAll('details').forEach(d => {
+  const key = detailKey(d);
+  const saved = store.getItem(key);
+  if (saved !== null) d.open = saved === '1';
+  d.addEventListener('toggle', () => store.setItem(key, d.open ? '1' : '0'));
+});
+
+document.getElementById('collapseActive').addEventListener('click', () => {
+  const activePanel = document.querySelector(`.tab-panel[data-panel="${currentTab}"]`);
+  if (!activePanel) return;
+  const details = Array.from(activePanel.querySelectorAll('details'));
+  const anyOpen = details.some(d => d.open);
+  details.forEach(d => { d.open = !anyOpen; store.setItem(detailKey(d), d.open ? '1' : '0'); });
+});
+
+document.getElementById('topBtn').addEventListener('click', () => {
+  store.setItem(scrollKey(currentTab), '0');
+  window.scrollTo(0,0);
+});
+</script>
+</body>
+</html>
