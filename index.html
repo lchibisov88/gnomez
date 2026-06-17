@@ -205,7 +205,11 @@ h4{font-size:11px;color:#9eb0a8;text-transform:uppercase;letter-spacing:.09em;ma
           <div class="weapon-card"><div class="weapon-name">Forgewrought plasma axe</div><div class="weapon-profile"><div><b>RNG</b><span>Melee</span></div><div><b>A</b><span>4</span></div><div><b>SKL</b><span>2+</span></div><div><b>S</b><span>6</span></div><div><b>AP</b><span>-2</span></div><div><b>D</b><span>2</span></div></div><div class="weapon-keywords empty"><span>No extra keywords</span></div></div>
         </div>
         <h4>Abilities / enhancement</h4>
-        <ul class="abilities"><li>Grim Efficiency and Leader utility for Hearthkyn / Hearthguard style packages.</li><li><b>Rampart Crest:</b> defensive crest profile for the unit he leads.</li><li><b>Oathbound Speculator:</b> KÂHL model only. In your Command phase, if this model is on the battlefield, it improves Yield Point economy / efficiency for Needgaârd. Keep him alive and on-table.</li></ul>
+        <ul class="abilities">
+          <li>Grim Efficiency and Leader utility for Hearthkyn / Hearthguard style packages.</li>
+          <li><b>Rampart Crest:</b> defensive crest profile for the unit he leads.</li>
+          <li><b>Oathbound Speculator:</b> Each time a model in the bearer's unit makes an attack, re-roll a Wound roll of 1. Each time the bearer's unit is selected to shoot or fight, you can spend 3YP. If you do, until the end of the phase, each time a model in the bearer's unit makes an attack, add 1 to the Wound roll.</li>
+        </ul>
       </div>
     </details>
 
@@ -409,7 +413,7 @@ h4{font-size:11px;color:#9eb0a8;text-transform:uppercase;letter-spacing:.09em;ma
 </div>
 
 <script>
-const KEY='lov_need_farseekers_v3';
+const KEY='lov_need_farseekers_v4_enhancement_fixed';
 const state=JSON.parse(localStorage.getItem(KEY)||'{}');
 function save(){localStorage.setItem(KEY,JSON.stringify(state));}
 
@@ -462,6 +466,5 @@ document.getElementById('collapseActive').addEventListener('click',()=>{
   ds.forEach(d=>d.open=!anyOpen);
 });
 </script>
-  <!-- cache bust v4 -->
 </body>
 </html>
