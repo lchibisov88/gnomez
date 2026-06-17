@@ -190,13 +190,13 @@ h4{font-size:11px;color:#9eb0a8;text-transform:uppercase;letter-spacing:.09em;ma
 
   <section class="tab-panel" data-panel="units" id="units" hidden>
     <h2 class="section-title">Unit Cards</h2>
-    <p class="section-note">Each card shows selected wargear first, then exact datasheet abilities and selected wargear abilities.</p>
+    <p class="section-note">Each card shows selected wargear first, then datasheet abilities and selected wargear abilities.</p>
     <div id="unitList"></div>
   </section>
 
   <div class="footer">
     <b>List:</b> Test · Leagues of Votann · Farseekers and Needgaârd Oathband · Strike Force · 2000 pts · 3 Detachment Points.<br>
-    <b>Cache key:</b> lov_need_farseekers_v6_exact_unit_rules.
+    <b>Cache key:</b> lov_need_farseekers_v7_kahl_loadout_fixed.
   </div>
 </div>
 
@@ -206,18 +206,23 @@ const units = [
     title:"Kâhl · Oathbound Speculator",
     meta:"<b>1×</b> · Character · 95 pts",
     role:"Leader · Enhancement",
-    stats:[["M","5″"],["T","5"],["Sv","3+"],["W","4"],["Ld","7+"],["OC","1"],["Inv","4+"]],
-    wargear:["Autoch-pattern combi-bolter","Forgewrought plasma axe","Rampart Crest","Enhancement: Oathbound Speculator"],
+    stats:[["M","5″"],["T","5"],["Sv","3+"],["W","4"],["Ld","7+"],["OC","1"]],
+    wargear:[
+      "Mass gauntlet",
+      "Teleport Crest",
+      "Volkanite disintegrator",
+      "Enhancement: Oathbound Speculator"
+    ],
     weapons:[
-      ["Autoch-pattern combi-bolter","24″","4","2+","4","0","1",[]],
-      ["Forgewrought plasma axe","Melee","4","2+","5","-2","2",[]]
+      ["Volkanite disintegrator","24″","3","2+","5","0","1",["Devastating Wounds"]],
+      ["Mass gauntlet","Melee","3","3+","8","-2","2",[]]
     ],
     abilities:[
       "<b>CORE:</b> Leader.",
       "<b>FACTION:</b> Prioritised Efficiency.",
       "<b>Kindred Hero:</b> While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "<b>Seized Opportunity:</b> Once per phase, one model from your army with this ability can use it when its unit destroys an enemy unit. If it does, you gain 1YP.",
-      "<b>Rampart Crest:</b> While this model is leading a unit, models in that unit have a 5+ invulnerable save.",
+      "<b>Teleport Crest:</b> Models in the bearer’s unit have the Deep Strike ability.",
       "<b>Oathbound Speculator:</b> Each time a model in the bearer's unit makes an attack, re-roll a Wound roll of 1. Each time the bearer's unit is selected to shoot or fight, you can spend 3YP. If you do, until the end of the phase, each time a model in the bearer's unit makes an attack, add 1 to the Wound roll."
     ],
     keywords:"INFANTRY, CHARACTER, KÂHL · LEAGUES OF VOTANN"
@@ -495,7 +500,7 @@ function renderUnits(){
 }
 renderUnits();
 
-const KEY='lov_need_farseekers_v6_exact_unit_rules';
+const KEY='lov_need_farseekers_v7_kahl_loadout_fixed';
 const state=JSON.parse(localStorage.getItem(KEY)||'{}');
 function save(){localStorage.setItem(KEY,JSON.stringify(state));}
 
