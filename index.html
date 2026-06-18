@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#080d0c">
-<title>LoV Play-Aid · Needgaârd + Farseekers</title>
+<title>Gnomez · LoV Play-Aid</title>
 <style>
 :root{
   --bg:#080d0c;--card:#111918;--ink:#edf5f0;--muted:#a9b9b2;
-  --line:#263733;--green:#00a779;--gold:#d9bd64;--blue:#0d6a92;
+  --line:#263733;--green:#00a779;--gold:#d9bd64;--blue:#0d6a92;--teal:#007d64;
 }
 *{box-sizing:border-box}
 html{background:var(--bg);scroll-behavior:auto}
@@ -55,16 +55,16 @@ summary::-webkit-details-marker{display:none}
 .panel>summary em{font-style:normal;color:#08100e;background:var(--green);padding:4px 7px;border-radius:8px;font-size:10px;font-weight:950;white-space:nowrap;float:right;margin-right:-22px}
 .panel-body,.unit-body{padding:0 12px 13px;border-top:1px solid rgba(255,255,255,.06)}
 p{font-size:13px;line-height:1.45;color:#d8e2dd;margin:10px 0}
-.strat>summary{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;position:relative;padding:11px 34px 11px 12px;background:linear-gradient(90deg,#101816,#102c27)}
+.strat>summary{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;position:relative;padding:11px 34px 11px 12px}
 .strat.core>summary{background:linear-gradient(90deg,#101816,#22240f)}
-.strat.far>summary{background:linear-gradient(90deg,#101820,#0b3447)}
 .strat.need>summary{background:linear-gradient(90deg,#101816,#173528)}
+.strat.cov>summary{background:linear-gradient(90deg,#101816,#063d31)}
 .strat-name{font-weight:950;text-transform:uppercase;letter-spacing:.04em;font-size:13px}
 .cost{background:#e9eee8;color:#080e0d;font-weight:950;padding:4px 8px;border-radius:9px}
-.mini-tag{display:inline-block;margin:10px 12px 0;padding:4px 7px;background:#063d31;border:1px solid #0b6d56;color:#abfff0;border-radius:8px;font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.07em}
-.strat.core .mini-tag{background:#39330b;border-color:#7d6815;color:#ffe99d}
-.strat.far .mini-tag{background:#0b3447;border-color:#0d6a92;color:#c8f2ff}
-.strat.need .mini-tag{background:#063d31;border-color:#0b6d56;color:#abfff0}
+.mini-tag{display:inline-block;margin:10px 12px 0;padding:4px 7px;border-radius:8px;font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.07em}
+.strat.core .mini-tag{background:#39330b;border:1px solid #7d6815;color:#ffe99d}
+.strat.need .mini-tag{background:#063d31;border:1px solid #0b6d56;color:#abfff0}
+.strat.cov .mini-tag{background:#06483c;border:1px solid #0aa57f;color:#c9fff1}
 .strat p{padding:0 12px 12px;margin:8px 0 0}
 .unit-meta{display:block;color:var(--muted);font-size:11px;font-weight:700;margin-top:4px}
 .unit-meta b{color:var(--gold)}
@@ -72,13 +72,21 @@ summary:after{content:"⌄";position:absolute;right:12px;top:50%;transform:trans
 details[open]>summary:after{transform:translateY(-50%) rotate(180deg)}
 .role-line{margin-top:10px}
 .role{display:inline-block;background:#231b0e;color:#f2dc9a;border:1px solid #5d4b22;padding:4px 8px;border-radius:999px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:950}
+.enhancement-box{
+  margin:10px 0 0;padding:10px;border-radius:14px;
+  background:linear-gradient(180deg,#3d3110,#1c170a);
+  border:1px solid #d9bd64;color:#fff2bb;
+  box-shadow:0 0 0 2px rgba(217,189,100,.12),0 8px 22px rgba(0,0,0,.35)
+}
+.enhancement-box b{display:block;color:#ffe38a;text-transform:uppercase;letter-spacing:.08em;font-size:11px;margin-bottom:5px}
+.enhancement-box span{font-size:12px;line-height:1.38;color:#fff5cf}
 .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
 .stat-grid div{background:#0c1211;border:1px solid #23322f;border-radius:11px;padding:7px;text-align:center}
 .stat-grid b{display:block;font-size:9px;color:#859790;text-transform:uppercase}
 .stat-grid span{font-size:14px;font-weight:950}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:11px;color:#dce7e1;background:#0c1413;border:1px solid #2b3a37;border-radius:999px;padding:5px 8px}
-.chip.wargear{border-color:#6d5c23;color:#f5dd91;background:#171407}
+.chip.hot{border-color:#d9bd64;color:#fff2bb;background:#2a210b}
 h4{font-size:11px;color:#9eb0a8;text-transform:uppercase;letter-spacing:.09em;margin:13px 0 7px}
 .weapon-list{display:grid;gap:8px;margin:6px 0 0}
 .weapon-card{border:1px solid #263733;border-radius:14px;background:#0b1110;padding:8px;overflow:hidden}
@@ -101,7 +109,7 @@ h4{font-size:11px;color:#9eb0a8;text-transform:uppercase;letter-spacing:.09em;ma
 <div class="app">
   <div aria-label="Play-aid tabs" class="stickybar" role="navigation">
     <div class="sticky-row">
-      <div class="army-chip">LoV · Needgaârd + Farseekers · 2000 pts</div>
+      <div class="army-chip">Gnomez · Needgaârd + Hearthguard Covenant · 1990 pts</div>
       <div class="yp-mini">
         <span>YP</span>
         <button aria-label="Decrease Yield Points" data-yp="-1" type="button">−</button>
@@ -124,22 +132,22 @@ h4{font-size:11px;color:#9eb0a8;text-transform:uppercase;letter-spacing:.09em;ma
 
   <section class="tab-panel" data-panel="rules" id="rules">
     <h2 class="section-title">Detachment / Army Rules</h2>
-    <p class="section-note">English-only table reference. Detachments: Needgaârd Oathband + Farseekers. Force Dispositions: Purge the Foe + Reconnaissance.</p>
+    <p class="section-note">English-only table reference. Detachments: Needgaârd Oathband + Hearthguard Covenant. Force Dispositions: Priority Assets + Purge the Foe.</p>
 
     <details class="panel" open>
       <summary><span>Army Rule · Prioritised Efficiency / Yield Points</span><em>CORE</em></summary>
       <div class="panel-body">
-        <p><b>Prioritised Efficiency.</b> If your Army Faction is LEAGUES OF VOTANN, LEAGUES OF VOTANN units from your army have one of two abilities: Hostile Acquisition or Fortify Takeover. At the start of the battle, your units have Hostile Acquisition until the start of your next Command phase. At the end of your Command phase, if you have fewer than 7YP, your units have Hostile Acquisition until the start of your next Command phase. At the end of your Command phase, if you have 7YP or more, your units have Fortify Takeover until the start of your next Command phase.</p>
-        <p><b>Hostile Acquisition.</b> Each time a model in this unit makes an attack that targets an enemy unit within range of one or more objective markers, add 1 to the Hit roll. You can re-roll Advance and Charge rolls made for this unit.</p>
-        <p><b>Fortify Takeover.</b> Each time a model in this unit makes an attack that targets an enemy unit, if this unit is within range of one or more objective markers you control, add 1 to the Hit roll. Each time an attack targets this unit, if the Strength characteristic of that attack is greater than this unit’s Toughness characteristic and this unit is not a VEHICLE, subtract 1 from the Wound roll.</p>
-        <p><b>Yield Points.</b> At the end of each player’s Command phase, you gain 1YP if you control one or more objective markers within your deployment zone, and, from the second battle round onwards, you gain 1 additional YP for each of the following conditions you satisfy: you control one or more objective markers not within your deployment zone; you control two or more objective markers not within your deployment zone; you control more objective markers than your opponent.</p>
+        <p><b>Yield Points (YP).</b> Track YP with the counter above. This list uses YP for Needgaârd riders, Oathbound Speculator, Iron Ambassador and Fury of the Hearth.</p>
+        <p><b>Hostile Acquisition.</b> Aggressive mode: helps hit efficiency and mobility around objectives.</p>
+        <p><b>Fortify Takeover.</b> Defensive/board-control mode. Several Needgaârd Stratagems require your army to have Fortify Takeover.</p>
       </div>
     </details>
 
     <details class="panel" open>
       <summary><span>Force Dispositions</span><em>MISSION</em></summary>
       <div class="panel-body">
-        <p><b>This army:</b> Purge the Foe + Reconnaissance.</p>
+        <p><b>This army:</b> Priority Assets + Purge the Foe.</p>
+        <p><b>Practical reminder.</b> Purge wants reliable kill conversion. Priority Assets wants you to control/pressure the right objective pieces without overexposing your Hearthguard bricks.</p>
       </div>
     </details>
 
@@ -148,218 +156,258 @@ h4{font-size:11px;color:#9eb0a8;text-transform:uppercase;letter-spacing:.09em;ma
       <div class="panel-body">
         <p><b>Detachment Rule.</b> Each time an enemy unit is destroyed, you gain 1YP.</p>
         <p><b>Oathbound Speculator.</b> Each time a model in the bearer's unit makes an attack, re-roll a Wound roll of 1. Each time the bearer's unit is selected to shoot or fight, you can spend 3YP. If you do, until the end of the phase, each time a model in the bearer's unit makes an attack, add 1 to the Wound roll.</p>
+        <p><b>Iron Ambassador.</b> LEAGUES OF VOTANN model equipped with an Autoch-pattern combi-bolter only. Once per battle, when the bearer’s unit is selected to shoot, the bearer can use this Enhancement. If it does, spend up to 3YP and, until the end of the phase, add the number of YP you just spent to the Damage characteristic of the bearer’s ranged weapons.</p>
       </div>
     </details>
 
     <details class="panel" open>
-      <summary><span>Farseekers · Eye of the Hunt</span><em>FARSEEKERS</em></summary>
+      <summary><span>Hearthguard Covenant · Avatars of the Ancestors</span><em>COVENANT</em></summary>
       <div class="panel-body">
-        <p><b>Detachment Rule.</b> Friendly HERNKYN units’ ranged attacks that target a unit within 12&quot; have +1 to hit rolls.</p>
-        <p><b>Pan-spectral Lockons · Upgrade.</b> PIONEERS unit only. In your Shooting phase, select one visible enemy unit within 12&quot; of this unit. That enemy unit is spotted. While a unit is spotted, that unit has +3&quot; detection range.</p>
-        <p><b>Shroudwërke Talismans · Upgrade.</b> YAEGIRS unit only. This unit has -3&quot; detection range.</p>
+        <p>Friendly <b>KÂHL / EINHYR CHAMPION / EINHYR HEARTHGUARD / ÛTHAR THE DESTINED</b> units’ ranged attacks that target a unit within 9&quot; can re-roll Wound rolls of 1.</p>
+        <p>This detachment has the <b>HEARTHGUARD</b> tag and cannot be taken with another HEARTHGUARD detachment.</p>
+        <p><b>High Kâhl.</b> KÂHL model only. In the Fight phase, when a model in this unit is destroyed, if this unit has not been selected to fight this phase, roll one D6: on a 4+, do not remove that model until after this unit has fought or the end of the phase.</p>
+        <p><b>Ironskein.</b> KÂHL model only. This model has +2 W.</p>
       </div>
     </details>
   </section>
 
   <section class="tab-panel" data-panel="strats" id="strats" hidden>
     <h2 class="section-title">Stratagems</h2>
-    <p class="section-note">Core Stratagems plus Needgaârd Oathband and Farseekers. No Hearthguard Covenant stratagems.</p>
+    <p class="section-note">Core Stratagems + Needgaârd Oathband + Hearthguard Covenant only.</p>
 
     <details class="strat core" open><summary><span class="strat-name">Command Re-roll</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Any phase, just after you make a Hit roll, Wound roll, Damage roll, saving throw, Advance roll, Charge roll or Battle-shock test. <b>TARGET:</b> That roll or test. <b>EFFECT:</b> Re-roll it.</p></details>
     <details class="strat core" open><summary><span class="strat-name">Epic Challenge</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Fight phase, when a CHARACTER model in your unit that is within Engagement Range of one or more Attached units is selected to fight. <b>TARGET:</b> That CHARACTER model. <b>EFFECT:</b> Until the end of the phase, melee attacks made by that model have PRECISION.</p></details>
     <details class="strat core" open><summary><span class="strat-name">Insane Bravery</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Battle-shock step of your Command phase, just before you take a Battle-shock test for a unit. <b>TARGET:</b> That unit. <b>EFFECT:</b> That unit automatically passes that test. You can only use this Stratagem once per battle.</p></details>
     <details class="strat core" open><summary><span class="strat-name">Explosives</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Your Shooting phase. <b>TARGET:</b> One GRENADES unit from your army that has not been selected to shoot this phase and is not within Engagement Range of enemy units. <b>EFFECT:</b> Select one enemy unit within 8&quot; and visible to your unit. Roll six D6: for each 4+, that enemy unit suffers 1 mortal wound.</p></details>
-    <details class="strat core" open><summary><span class="strat-name">Crushing Impact</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Your Charge phase, after a VEHICLE unit from your army ends a Charge move. <b>TARGET:</b> That VEHICLE unit. <b>EFFECT:</b> Select one enemy unit within Engagement Range of your unit and resolve Crushing Impact as described in the Core Rules.</p></details>
+    <details class="strat core" open><summary><span class="strat-name">Crushing Impact</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Your Charge phase, after a VEHICLE unit from your army ends a Charge move. <b>TARGET:</b> That VEHICLE unit. <b>EFFECT:</b> Resolve Crushing Impact as described in the Core Rules.</p></details>
     <details class="strat core" open><summary><span class="strat-name">Rapid Ingress</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> End of your opponent’s Movement phase. <b>TARGET:</b> One unit from your army that is in Reserves. <b>EFFECT:</b> Your unit can arrive as if it were the Reinforcements step of your Movement phase, following all normal placement restrictions.</p></details>
     <details class="strat core" open><summary><span class="strat-name">Fire Overwatch</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Your opponent’s Movement or Charge phase, just after an enemy unit is set up or starts/ends a Normal, Advance, Fall Back or Charge move. <b>TARGET:</b> One unit from your army within 24&quot; of that enemy unit and eligible to shoot. <b>EFFECT:</b> Shoot that enemy unit as if it were your Shooting phase. Unmodified Hit rolls of 6 are required, unless stated otherwise.</p></details>
     <details class="strat core" open><summary><span class="strat-name">Smokescreen</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Your opponent’s Shooting phase, when an enemy unit selects its targets. <b>TARGET:</b> One SMOKE unit from your army that was selected as the target of one or more attacks. <b>EFFECT:</b> Until the end of the phase, attacks that target your unit subtract 1 from the Hit roll and your unit has Benefit of Cover.</p></details>
-    <details class="strat core" open><summary><span class="strat-name">Heroic Intervention</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Your opponent’s Charge phase, just after an enemy unit ends a Charge move. <b>TARGET:</b> One unit from your army that is within 6&quot; of that enemy unit and would be eligible to declare a charge against it. <b>EFFECT:</b> Your unit declares a charge against that enemy unit. It does not receive any Charge bonus this turn.</p></details>
-    <details class="strat core" open><summary><span class="strat-name">Counter-offensive</span><span class="cost">2CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Fight phase, just after an enemy unit has fought. <b>TARGET:</b> One unit from your army that is within Engagement Range of one or more enemy units and has not fought this phase. <b>EFFECT:</b> Your unit fights next.</p></details>
+    <details class="strat core" open><summary><span class="strat-name">Heroic Intervention</span><span class="cost">1CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Your opponent’s Charge phase, just after an enemy unit ends a Charge move. <b>TARGET:</b> One unit from your army within 6&quot; of that enemy unit and eligible to declare a charge against it. <b>EFFECT:</b> Your unit declares a charge against that enemy unit. It does not receive any Charge bonus this turn.</p></details>
+    <details class="strat core" open><summary><span class="strat-name">Counter-offensive</span><span class="cost">2CP</span></summary><span class="mini-tag">Core Stratagem</span><p><b>WHEN:</b> Fight phase, just after an enemy unit has fought. <b>TARGET:</b> One unit from your army within Engagement Range that has not fought this phase. <b>EFFECT:</b> Your unit fights next.</p></details>
 
-    <details class="strat need" open><summary><span class="strat-name">Void Hardened</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband · Wargear Stratagem</span><p><b>WHEN:</b> Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets, if units from your army have Fortify Takeover. <b>TARGET:</b> One LEAGUES OF VOTANN unit from your army that was selected as the target of one or more of the attacking unit’s attacks. <b>EFFECT:</b> Until the attacking unit has finished making its attacks, each time an attack targets your unit, worsen the Armour Penetration characteristic of that attack by 1.</p></details>
-    <details class="strat need" open><summary><span class="strat-name">Honour of the Hold</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband · Battle Tactic Stratagem</span><p><b>WHEN:</b> Fight phase. <b>TARGET:</b> One LEAGUES OF VOTANN unit from your army that has not been selected to fight this phase. <b>EFFECT:</b> You can spend 3YP. Select one enemy unit within Engagement Range of your unit. Until the end of the phase, melee attacks made by your unit that target that enemy unit improve AP by 1. If you spent YP, improve AP by 2 instead.</p></details>
-    <details class="strat need" open><summary><span class="strat-name">Ordered Retreat</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband · Strategic Ploy Stratagem</span><p><b>WHEN:</b> Your Movement phase, just after a LEAGUES OF VOTANN unit from your army Falls Back. <b>TARGET:</b> That LEAGUES OF VOTANN unit. <b>EFFECT:</b> Until the end of the turn, your unit is eligible to shoot and declare a charge in a turn in which it Fell Back.</p></details>
-    <details class="strat need" open><summary><span class="strat-name">Ancestral Sentence</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband · Battle Tactic Stratagem</span><p><b>WHEN:</b> Your Shooting phase. <b>TARGET:</b> One LEAGUES OF VOTANN unit from your army that has not been selected to shoot this phase. <b>EFFECT:</b> You can spend 3YP. Until the end of the phase, ranged weapons equipped by models in your unit have SUSTAINED HITS 1. If you spent YP, they have SUSTAINED HITS 2 instead.</p></details>
-    <details class="strat need" open><summary><span class="strat-name">HunTR’s Mark</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband · Battle Tactic Stratagem</span><p><b>WHEN:</b> Your Shooting phase. <b>TARGET:</b> One LEAGUES OF VOTANN unit from your army that has not been selected to shoot this phase. <b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.</p></details>
-    <details class="strat need" open><summary><span class="strat-name">Reactive Reprisal</span><span class="cost">2CP</span></summary><span class="mini-tag">Needgaârd Oathband · Strategic Ploy Stratagem</span><p><b>WHEN:</b> Your opponent’s Shooting phase, just after an enemy unit has shot, if units from your army have Fortify Takeover. <b>TARGET:</b> One LEAGUES OF VOTANN unit from your army that was selected as the target of one or more of the attacking unit’s attacks. <b>EFFECT:</b> Your unit can shoot as if it were your Shooting phase, can only target that enemy unit when doing so, and can only do so if that enemy unit is an eligible target.</p></details>
+    <details class="strat need" open><summary><span class="strat-name">Void Hardened</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband</span><p><b>WHEN:</b> Opponent’s Shooting phase or Fight phase, just after an enemy unit has selected its targets, if units from your army have Fortify Takeover. <b>TARGET:</b> One LEAGUES OF VOTANN unit selected as a target. <b>EFFECT:</b> Until the attacking unit has finished its attacks, each time an attack targets your unit, worsen AP by 1.</p></details>
+    <details class="strat need" open><summary><span class="strat-name">Honour of the Hold</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband</span><p><b>WHEN:</b> Fight phase. <b>TARGET:</b> One LEAGUES OF VOTANN unit not selected to fight this phase. <b>EFFECT:</b> You can spend 3YP. Select one enemy unit within Engagement Range. Until end of phase, melee attacks into that enemy improve AP by 1, or by 2 if you spent YP.</p></details>
+    <details class="strat need" open><summary><span class="strat-name">Ordered Retreat</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband</span><p><b>WHEN:</b> Your Movement phase, just after a LEAGUES OF VOTANN unit Falls Back. <b>TARGET:</b> That unit. <b>EFFECT:</b> Until end of turn, it is eligible to shoot and declare a charge in a turn in which it Fell Back.</p></details>
+    <details class="strat need" open><summary><span class="strat-name">Ancestral Sentence</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband</span><p><b>WHEN:</b> Your Shooting phase. <b>TARGET:</b> One LEAGUES OF VOTANN unit not selected to shoot this phase. <b>EFFECT:</b> You can spend 3YP. Ranged weapons have SUSTAINED HITS 1; if you spent YP, SUSTAINED HITS 2 instead.</p></details>
+    <details class="strat need" open><summary><span class="strat-name">HunTR’s Mark</span><span class="cost">1CP</span></summary><span class="mini-tag">Needgaârd Oathband</span><p><b>WHEN:</b> Your Shooting phase. <b>TARGET:</b> One LEAGUES OF VOTANN unit not selected to shoot this phase. <b>EFFECT:</b> Until end of phase, each time a model in your unit attacks, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.</p></details>
+    <details class="strat need" open><summary><span class="strat-name">Reactive Reprisal</span><span class="cost">2CP</span></summary><span class="mini-tag">Needgaârd Oathband</span><p><b>WHEN:</b> Opponent’s Shooting phase, just after an enemy unit has shot, if units from your army have Fortify Takeover. <b>TARGET:</b> One LEAGUES OF VOTANN unit targeted by that enemy. <b>EFFECT:</b> Your unit can shoot as if it were your Shooting phase, targeting only that enemy unit if eligible.</p></details>
 
-    <details class="strat far" open><summary><span class="strat-name">Scornful Analysis</span><span class="cost">1CP</span></summary><span class="mini-tag">Farseekers Stratagem</span><p><b>WHEN:</b> Start of your Shooting phase. <b>TARGET:</b> One friendly HERNKYN unit. <b>EFFECT:</b> Select one visible enemy unit within 12&quot; of your unit. Friendly LEAGUES OF VOTANN units’ attacks that target that enemy unit have IGNORES COVER.</p></details>
-    <details class="strat far" open><summary><span class="strat-name">No Shot Wasted</span><span class="cost">1CP</span></summary><span class="mini-tag">Farseekers Stratagem</span><p><b>WHEN:</b> Your Shooting phase, when a friendly HERNKYN unit is selected to shoot. <b>TARGET:</b> That HERNKYN unit. <b>EFFECT:</b> Your unit’s ranged attacks have LETHAL HITS.</p></details>
-    <details class="strat far" open><summary><span class="strat-name">Economy of Motion</span><span class="cost">1CP</span></summary><span class="mini-tag">Farseekers Stratagem</span><p><b>WHEN:</b> Your opponent’s Movement phase, when an enemy unit ends a move within 8&quot; of a friendly unengaged PIONEERS unit. <b>TARGET:</b> That PIONEERS unit. <b>EFFECT:</b> Your unit can make a Normal move of up to D3+3&quot;.</p></details>
+    <details class="strat cov" open><summary><span class="strat-name">Brëkkeknots</span><span class="cost">1CP</span></summary><span class="mini-tag">Hearthguard Covenant</span><p><b>WHEN:</b> Your opponent’s Shooting phase or the Fight phase, when an enemy unit targets a friendly EINHYR HEARTHGUARD unit. <b>TARGET:</b> That EINHYR HEARTHGUARD unit. <b>EFFECT:</b> Your unit has 4+ Invulnerable Save.</p></details>
+    <details class="strat cov" open><summary><span class="strat-name">Fury of the Hearth</span><span class="cost">1CP</span></summary><span class="mini-tag">Hearthguard Covenant</span><p><b>WHEN:</b> Your Shooting phase, when a friendly EINHYR HEARTHGUARD unit is selected to shoot. <b>TARGET:</b> That EINHYR HEARTHGUARD unit. <b>EFFECT:</b> Your unit’s ranged attacks have +1S. If you spend 1YP, those attacks also have SUSTAINED HITS 1.</p></details>
+    <details class="strat cov" open><summary><span class="strat-name">Materialisation Matrices</span><span class="cost">1CP</span></summary><span class="mini-tag">Hearthguard Covenant</span><p><b>WHEN:</b> Your Movement phase, when a friendly EINHYR HEARTHGUARD unit with Deep Strike is selected to make an ingress move. <b>TARGET:</b> That EINHYR HEARTHGUARD unit. <b>EFFECT:</b> Set up more than 6&quot; horizontally from all enemy units, even in opponent’s deployment zone. Your unit is not eligible to declare a charge until the end of the turn.</p></details>
   </section>
 
   <section class="tab-panel" data-panel="units" id="units" hidden>
     <h2 class="section-title">Unit Cards</h2>
-    <p class="section-note">Each card shows selected wargear first, then datasheet abilities and selected wargear abilities.</p>
+    <p class="section-note">Identical units are grouped. Enhancements are highlighted on Character cards.</p>
     <div id="unitList"></div>
   </section>
 
   <div class="footer">
-    <b>List:</b> Test · Leagues of Votann · Farseekers and Needgaârd Oathband · Strike Force · 2000 pts · 3 Detachment Points.<br>
-    <b>Cache key:</b> lov_need_farseekers_v7_kahl_loadout_fixed.
+    <b>List:</b> Gnomez · Leagues of Votann · Hearthguard Covenant + Needgaârd Oathband · Strike Force · 1990 / 2000 pts · 3 Detachment Points.<br>
+    <b>Note:</b> This is a compact play-aid for fast table reference. Check final event pack / MFM before tournament play.
   </div>
 </div>
 
 <script>
 const units = [
   {
-    title:"Kâhl · Oathbound Speculator",
-    meta:"<b>1×</b> · Character · 95 pts",
-    role:"Leader · Enhancement",
-    stats:[["M","5″"],["T","5"],["Sv","3+"],["W","4"],["Ld","7+"],["OC","1"]],
-    wargear:[
-      "Mass gauntlet",
-      "Teleport Crest",
-      "Volkanite disintegrator",
-      "Enhancement: Oathbound Speculator"
-    ],
+    title:"Arkanyst Evaluator",
+    meta:"<b>1×</b> · Character · 70 pts",
+    role:"Character · Support / YP conversion",
+    stats:[["M","5″"],["T","5"],["Sv","3+"],["W","4"],["Ld","7+"],["OC","1"],["DD","1"]],
+    loadout:["Close combat weapon","Transmatter inverter"],
     weapons:[
-      ["Volkanite disintegrator","24″","3","2+","5","0","1",["Devastating Wounds"]],
-      ["Mass gauntlet","Melee","3","3+","8","-2","2",[]]
+      ["Transmatter inverter — half charge","12″","3","2+","8","-1","1",["Rapid Fire 1"]],
+      ["Transmatter inverter — full charge","18″","3","2+","8","-2","2",["Hazardous","Rapid Fire 2"]],
+      ["Transmatter inverter — overcharge","24″","3","2+","8","-3","3",["Hazardous","Overcharge","Rapid Fire 3"]],
+      ["Close combat weapon","Melee","1","4+","3","0","1",[]]
     ],
     abilities:[
-      "<b>CORE:</b> Leader.",
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Kindred Hero:</b> While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
-      "<b>Seized Opportunity:</b> Once per phase, one model from your army with this ability can use it when its unit destroys an enemy unit. If it does, you gain 1YP.",
-      "<b>Teleport Crest:</b> Models in the bearer’s unit have the Deep Strike ability.",
-      "<b>Oathbound Speculator:</b> Each time a model in the bearer's unit makes an attack, re-roll a Wound roll of 1. Each time the bearer's unit is selected to shoot or fight, you can spend 3YP. If you do, until the end of the phase, each time a model in the bearer's unit makes an attack, add 1 to the Wound roll."
+      "<b>Science Guild Support:</b> While this model is within 3&quot; of one or more other friendly LEAGUES OF VOTANN INFANTRY units, excluding units with Lone Operative, this model has Lone Operative.",
+      "<b>Resource Transmutation:</b> Once per turn, in your Shooting phase, when this model is selected to shoot, you can spend 1YP. Until end of phase, its ranged weapons have SUSTAINED HITS 1. After it has shot, if one or more enemy units were destroyed by those attacks, you can gain up to 2YP.",
+      "<b>Overcharge:</b> Each time the bearer takes a Hazardous test for this weapon profile, subtract 2 from the result."
+    ]
+  },
+  {
+    title:"Einhyr Champion · Iron Ambassador",
+    meta:"<b>1×</b> · Character · 70 pts",
+    role:"Leader · Enhancement",
+    enhancementName:"IRON AMBASSADOR",
+    enhancementText:"Once per battle, when the bearer’s unit is selected to shoot, spend up to 3YP. Until end of phase, add the number of YP spent to the Damage characteristic of the bearer’s ranged weapons. Bearer must be equipped with Autoch-pattern combi-bolter.",
+    stats:[["M","5″"],["T","6"],["Sv","2+"],["W","5"],["Ld","7+"],["OC","1"],["Inv","4+"]],
+    loadout:["Autoch-pattern combi-bolter","Mass hammer","Teleport Crest","Iron Ambassador"],
+    weapons:[
+      ["Autoch-pattern combi-bolter","24″","2","2+","4","0","1",["Rapid Fire 2"]],
+      ["Mass hammer","Melee","5","3+","10","-2","3",["Devastating Wounds"]]
     ],
-    keywords:"INFANTRY, CHARACTER, KÂHL · LEAGUES OF VOTANN"
+    abilities:[
+      "<b>Teleport Crest:</b> this model’s unit has Deep Strike.",
+      "<b>Mass Driver Accelerators:</b> charge / impact damage utility. Use as counter-punch or with 5 Hearthguard.",
+      "<b>Covenant synergy:</b> qualifies for Avatars of the Ancestors ranged wound re-rolls of 1 into targets within 9&quot;."
+    ]
+  },
+  {
+    title:"Kâhl · Oathbound Speculator",
+    meta:"<b>1×</b> · Warlord · Character · 95 pts",
+    role:"Warlord · Leader · Enhancement",
+    enhancementName:"OATHBOUND SPECULATOR",
+    enhancementText:"Each time a model in the bearer’s unit makes an attack, re-roll a Wound roll of 1. Each time the bearer’s unit is selected to shoot or fight, you can spend 3YP. If you do, until end of phase, add 1 to the Wound roll.",
+    stats:[["M","5″"],["T","5"],["Sv","3+"],["W","5"],["Ld","6+"],["OC","1"],["Inv","4+"]],
+    loadout:["Mass gauntlet","Teleport Crest","Volkanite disintegrator","Oathbound Speculator","Warlord"],
+    weapons:[
+      ["Volkanite disintegrator","24″","3","2+","5","0","1",["Devastating Wounds"]],
+      ["Mass gauntlet","Melee","3","3+","8","-2","3",[]]
+    ],
+    abilities:[
+      "<b>Grim Efficiency:</b> leader utility and kill conversion support.",
+      "<b>Teleport Crest:</b> this model’s unit has Deep Strike.",
+      "<b>Covenant synergy:</b> qualifies for Avatars of the Ancestors ranged wound re-rolls of 1 into targets within 9&quot;."
+    ]
   },
   {
     title:"Ûthar the Destined",
-    meta:"<b>1×</b> · Warlord · 90 pts",
-    role:"Epic Hero · Leader",
+    meta:"<b>1×</b> · Epic Hero · 90 pts",
+    role:"Epic Hero · Character",
     stats:[["M","5″"],["T","5"],["Sv","3+"],["W","5"],["Ld","6+"],["OC","1"],["Inv","4+"]],
-    wargear:["Blade of the Ancestors","Volkanite disintegrator","Rampart Crest"],
+    loadout:["Blade of the Ancestors","Rampart Crest","Volkanite disintegrator"],
     weapons:[
       ["Volkanite disintegrator","24″","3","2+","5","0","1",["Devastating Wounds"]],
-      ["Blade of the Ancestors","Melee","5","2+","6","-3","2",["Devastating Wounds"]]
+      ["Blade of the Ancestors","Melee","5","2+","6","-3","2",[]]
     ],
     abilities:[
-      "<b>CORE:</b> Leader.",
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Ancestral Fortune:</b> Once per turn, you can spend 1YP to change one Hit roll, one Wound roll or one saving throw made for this model to an unmodified 6.",
-      "<b>Grim Efficiency:</b> Once per battle round, when a friendly LEAGUES OF VOTANN unit within 12″ of this model is targeted with a Stratagem, this model can use this ability. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
-      "<b>Rampart Crest:</b> While the bearer is leading a unit, models in that unit have a 5+ invulnerable save."
-    ],
-    keywords:"INFANTRY, CHARACTER, EPIC HERO, KÂHL, ÛTHAR THE DESTINED · LEAGUES OF VOTANN"
+      "<b>Rampart Crest:</b> defensive crest profile.",
+      "<b>Covenant synergy:</b> qualifies for Avatars of the Ancestors ranged wound re-rolls of 1 into targets within 9&quot;.",
+      "Use as durable character support / counter-punch."
+    ]
   },
   {
     title:"Hearthkyn Warriors",
     meta:"<b>1×</b> · 10 models · 100 pts",
     role:"Battleline",
-    stats:[["M","5″"],["T","5"],["Sv","4+"],["W","1"],["Ld","7+"],["OC","2"],["FNP","6+"],["Inv","5+"]],
-    wargear:[
-      "Theyn: Theyn’s pistol, Theyn’s melee weapon, Weavefield crest",
-      "9× Autoch-pattern bolt pistol",
-      "7× Autoch-pattern bolter",
-      "1× HYLas auto rifle",
-      "1× Magna-rail rifle",
-      "9× Close combat weapon"
-    ],
+    stats:[["M","5″"],["T","5"],["Sv","4+"],["W","1"],["Ld","7+"],["OC","2"]],
+    loadout:["Theyn: Autoch-pattern bolt pistol, Close combat weapon, Theyn’s melee weapon, Theyn’s pistol, Weavefield crest","7× Autoch-pattern bolter","1× HYLas auto rifle","1× Magna-rail rifle","9× Autoch-pattern bolt pistol","9× Close combat weapon"],
     weapons:[
-      ["Theyn’s pistol","12″","1","4+","8","-2","1",["Pistol"]],
-      ["Theyn’s melee weapon","Melee","2","4+","5","-2","2",[]],
-      ["Autoch-pattern bolt pistol","12″","1","4+","4","0","1",["Pistol"]],
       ["Autoch-pattern bolter","24″","2","4+","4","0","1",[]],
-      ["HYLas auto rifle","24″","3","4+","6","-1","1",["Assault","Rapid Fire 3"]],
-      ["Magna-rail rifle","18″","1","5+","12","-3","D3+3",["Devastating Wounds","Heavy"]],
-      ["Close combat weapon","Melee","1","4+","4","0","1",[]]
+      ["HYLas auto rifle","24″","3","4+","6","-1","1",["Assault","Sustained Hits 1"]],
+      ["Magna-rail rifle","24″","1","4+","12","-4","D3+3",["Devastating Wounds","Heavy"]],
+      ["Autoch-pattern bolt pistol","12″","1","4+","4","0","1",["Pistol"]],
+      ["Close combat weapon","Melee","1","4+","3","0","1",[]]
     ],
     abilities:[
-      "<b>CORE:</b> Feel No Pain 6+.",
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Luck Has. Need Keeps. Toil Earns:</b> At the end of your Command phase, if this unit is within range of an objective marker you control, that objective marker remains under your control until your opponent’s Level of Control over that objective markers greater than yours at the end of a phase.",
-      "<b>Panspectral Scanning:</b> Each time a model in this unit makes a ranged attack, re-roll a Hit roll of 1.",
-      "<b>Weavefield Crest:</b> Models in the bearer’s unit have a 5+ invulnerable save."
+      "Battleline / objective utility.",
+      "Weavefield crest gives defensive utility to the unit.",
+      "Usually split with Sagitaur if mission/list pack allows."
+    ]
+  },
+  {
+    title:"Kapricus Carrier",
+    meta:"<b>1×</b> · Dedicated Transport · 75 pts",
+    role:"Transport · Hernkyn · Smoke",
+    stats:[["M","12″"],["T","8"],["Sv","4+"],["W","9"],["Ld","7+"],["OC","2"],["DD","1"]],
+    loadout:["Armoured hull","Magna-coil autocannon","Smoke Launcher","Twin magna-coil autocannon"],
+    weapons:[
+      ["Magna-coil autocannon","24″","3","4+","7","-1","2",[]],
+      ["Twin magna-coil autocannon","24″","3","4+","7","-1","2",["Twin-linked"]],
+      ["Armoured hull","Melee","3","4+","6","0","1",[]]
     ],
-    keywords:"INFANTRY, BATTLELINE, GRENADES, HEARTHKYN WARRIORS · LEAGUES OF VOTANN"
+    abilities:[
+      "Transport and utility hull.",
+      "Has SMOKE keyword for Smokescreen.",
+      "Use for screening, movement angles, and protecting infantry."
+    ]
   },
   {
     title:"Sagitaur",
     meta:"<b>1×</b> · Dedicated Transport · 85 pts",
-    role:"Dedicated Transport · Vehicle",
+    role:"Transport · Vehicle",
     stats:[["M","12″"],["T","9"],["Sv","3+"],["W","9"],["Ld","7+"],["OC","2"],["DD","1"]],
-    wargear:["MATR autocannon","Twin bolt cannon","Armoured wheels"],
+    loadout:["Armoured wheels","MATR autocannon","Twin bolt cannon"],
     weapons:[
       ["MATR autocannon","24″","6","4+","7","-1","2",["Assault","Sustained Hits 1"]],
       ["Twin bolt cannon","36″","3","4+","6","-1","2",["Sustained Hits 2","Twin-linked"]],
       ["Armoured wheels","Melee","3","4+","6","0","1",[]]
     ],
     abilities:[
-      "<b>CORE:</b> Deadly Demise 1.",
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Blistering Advance:</b> Units can disembark from this TRANSPORT after it has Advanced. Units that do so count as having made a Normal move that phase, and cannot declare a charge in the same turn, but can otherwise act normally in the remainder of the turn.",
-      "<b>Transport:</b> This model has a transport capacity of 6 LEAGUES OF VOTANN INFANTRY models. It cannot transport ARTILLERY, EXOARMOUR, EXOFRAME or IRONKIN STEELJACKS models.",
-      "<b>Warrior Split:</b> At the start of the Declare Battle Formations step, you can select one HEARTHKYN WARRIORS unit from your army that has not been split. If you do, that unit is split into two units, each containing as equal a number of models as possible. One of these units must start the battle embarked within this TRANSPORT; the other can start the battle embarked within another TRANSPORT, or it can be deployed as a separate unit."
-    ],
-    keywords:"VEHICLE, TRANSPORT, DEDICATED TRANSPORT, SAGITAUR · LEAGUES OF VOTANN"
+      "Transport, screen, utility and early objective pressure.",
+      "Good for splitting Warriors and enabling Priority Assets play."
+    ]
   },
   {
     title:"Brôkhyr Thunderkyn · SP Conversion Beamers",
     meta:"<b>1×</b> · 6 models · 160 pts",
-    role:"Infantry · Exoframe",
+    role:"Heavy shooting",
     stats:[["M","5″"],["T","6"],["Sv","3+"],["W","2"],["Ld","7+"],["OC","1"]],
-    wargear:["6× SP conversion beamer","6× Close combat weapon"],
+    loadout:["6× SP conversion beamer","6× Close combat weapon"],
     weapons:[
       ["SP conversion beamer","24″","2","4+","7","-2","3",["Conversion","Lethal Hits"]],
       ["Close combat weapon","Melee","2","4+","4","0","1",[]]
     ],
     abilities:[
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Breaching Fire:</b> In your Shooting phase, after this unit has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next Shooting phase, that enemy unit cannot have the Benefit of Cover.",
-      "<b>Conversion:</b> Each time an attack made with this weapon targets an enemy unit that is not within 12″, an unmodified successful Hit roll of 4+ scores a Critical Hit."
-    ],
-    keywords:"INFANTRY, EXOFRAME, BRÔKHYR, THUNDERKYN · LEAGUES OF VOTANN"
+      "Core firebase for mid-board damage.",
+      "Use Needgaârd damage tools when the target must die."
+    ]
   },
   {
     title:"Brôkhyr Thunderkyn · Graviton Blast Cannons",
-    meta:"<b>2×</b> · 3 models · 80 / 90 pts",
-    role:"Infantry · Exoframe",
+    meta:"<b>1×</b> · 3 models · 80 pts",
+    role:"Anti-vehicle / anti-monster",
     stats:[["M","5″"],["T","6"],["Sv","3+"],["W","2"],["Ld","7+"],["OC","1"]],
-    wargear:["Each unit: 3× Graviton blast cannon","Each unit: 3× Close combat weapon"],
+    loadout:["3× Graviton blast cannon","3× Close combat weapon"],
     weapons:[
       ["Graviton blast cannon","24″","3","4+","5","-2","3",["Anti-Monster 3+","Anti-Vehicle 3+"]],
       ["Close combat weapon","Melee","2","4+","4","0","1",[]]
     ],
     abilities:[
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Breaching Fire:</b> In your Shooting phase, after this unit has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next Shooting phase, that enemy unit cannot have the Benefit of Cover."
-    ],
-    keywords:"INFANTRY, EXOFRAME, BRÔKHYR, THUNDERKYN · LEAGUES OF VOTANN"
+      "Anti-vehicle / anti-monster tech.",
+      "Use terrain and Hekaton pressure to force targets into range."
+    ]
   },
   {
-    title:"Einhyr Hearthguard",
+    title:"Einhyr Hearthguard · 10 models",
     meta:"<b>1×</b> · 10 models · 270 pts",
-    role:"Infantry · Exoarmour",
-    stats:[["M","5″"],["T","5"],["Sv","2+"],["W","2"],["Ld","7+"],["OC","1"],["Inv","5+"]],
-    wargear:[
-      "Hesyr: EtaCarn plasma gun, Exoarmour grenade launcher, Graviton hammer, Weavefield crest",
-      "9× EtaCarn plasma gun",
-      "9× Exoarmour grenade launcher",
-      "9× Concussion gauntlet"
-    ],
+    role:"Elite brick · Covenant target",
+    stats:[["M","5″"],["T","6"],["Sv","2+"],["W","3"],["Ld","7+"],["OC","1"],["Inv","5+"]],
+    loadout:["Hesyr: EtaCarn plasma gun, Exoarmour grenade launcher, Graviton hammer, Weavefield crest","9× EtaCarn plasma gun","9× Exoarmour grenade launcher","9× Concussion gauntlet"],
     weapons:[
-      ["EtaCarn plasma gun","24″","1","3+","7","-3","2",["Rapid Fire 1"]],
-      ["Exoarmour grenade launcher","24″","D3","3+","3","0","1",["Blast"]],
-      ["Concussion gauntlet","Melee","2","3+","8","-2","2",[]],
-      ["Graviton hammer","Melee","3","4+","9","-1","3",["Anti-Monster 3+","Anti-Vehicle 3+"]]
+      ["EtaCarn plasma gun","18″","1","3+","8","-3","2",[]],
+      ["Exoarmour grenade launcher","18″","D6","3+","4","0","1",["Blast"]],
+      ["Concussion gauntlet","Melee","3","4+","9","-2","2",[]],
+      ["Graviton hammer","Melee","3","4+","10","-2","3",[]]
     ],
     abilities:[
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Decisive Destruction:</b> Each time a model in this unit makes a ranged attack that targets the closest eligible target, re-roll a Hit roll of 1.",
-      "<b>Weavefield Crest:</b> Models in the bearer’s unit have a 5+ invulnerable save."
+      "<b>Deep Strike.</b>",
+      "<b>Decisive Destruction:</b> each time a model in this unit makes a ranged attack that targets the closest eligible target, re-roll a Hit roll of 1.",
+      "<b>Weavefield Crest:</b> models in the bearer’s unit have a 5+ invulnerable save.",
+      "<b>Covenant:</b> main target for Brëkkeknots, Fury of the Hearth and Materialisation Matrices."
+    ]
+  },
+  {
+    title:"Einhyr Hearthguard · 5 models",
+    meta:"<b>1×</b> · 5 models · 130 pts",
+    role:"Elite utility · Covenant target",
+    stats:[["M","5″"],["T","6"],["Sv","2+"],["W","3"],["Ld","7+"],["OC","1"],["Inv","5+"]],
+    loadout:["Hesyr: EtaCarn plasma gun, Exoarmour grenade launcher, Graviton hammer, Weavefield crest","4× EtaCarn plasma gun","4× Exoarmour grenade launcher","4× Concussion gauntlet"],
+    weapons:[
+      ["EtaCarn plasma gun","18″","1","3+","8","-3","2",[]],
+      ["Exoarmour grenade launcher","18″","D6","3+","4","0","1",["Blast"]],
+      ["Concussion gauntlet","Melee","3","4+","9","-2","2",[]],
+      ["Graviton hammer","Melee","3","4+","10","-2","3",[]]
     ],
-    keywords:"INFANTRY, EXOARMOUR, EINHYR HEARTHGUARD · LEAGUES OF VOTANN"
+    abilities:[
+      "<b>Deep Strike.</b>",
+      "<b>Decisive Destruction:</b> each time a model in this unit makes a ranged attack that targets the closest eligible target, re-roll a Hit roll of 1.",
+      "<b>Weavefield Crest:</b> models in the bearer’s unit have a 5+ invulnerable save.",
+      "<b>Covenant:</b> can use Brëkkeknots, Fury of the Hearth and Materialisation Matrices."
+    ]
   },
   {
     title:"Hekaton Land Fortress",
     meta:"<b>2×</b> · 250 / 265 pts",
-    role:"Vehicle · Transport",
+    role:"Heavy vehicle · Transport · Firebase",
     stats:[["M","10″"],["T","12"],["Sv","2+"],["W","16"],["Ld","7+"],["OC","5"],["DD","D6"]],
-    wargear:["Each: Heavy magna-rail cannon","Each: MATR autocannon","Each: Panspectral Scanner","Each: 2× Twin bolt cannon","Each: Armoured wheels"],
+    loadout:["Each: Armoured wheels","Each: Heavy magna-rail cannon","Each: MATR autocannon","Each: Panspectral Scanner","Each: 2× Twin bolt cannon"],
     weapons:[
       ["Heavy magna-rail cannon","30″","2","4+","18","-4","D6+4",["Devastating Wounds","Heavy"]],
       ["MATR autocannon","24″","6","4+","7","-1","2",["Assault","Sustained Hits 1"]],
@@ -367,28 +415,17 @@ const units = [
       ["Armoured wheels","Melee","6","4+","8","0","1",[]]
     ],
     abilities:[
-      "<b>CORE:</b> Deadly Demise D6.",
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>MultiCOG Targeting:</b> Each time this model makes a ranged attack, you can ignore any or all modifiers to the following: that attack’s Ballistic Skill characteristic; the Hit roll.",
-      "<b>Panspectral Scanner:</b> Each time a model in the bearer’s unit makes a ranged attack, re-roll a Hit roll of 1.",
-      "<b>Damaged: 1-5 wounds remaining:</b> While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-      "<b>Transport:</b> This model has a transport capacity of 14 LEAGUES OF VOTANN INFANTRY models. Each EXOARMOUR, EXOFRAME or IRONKIN STEELJACKS model takes up the space of 2 models. It cannot transport ARTILLERY models."
-    ],
-    keywords:"VEHICLE, TRANSPORT, HEKATON LAND FORTRESS · LEAGUES OF VOTANN"
+      "Primary long-range threat and transport platform.",
+      "Good Purge the Foe conversion tool: finish one target rather than splitting too much.",
+      "Panspectral Scanner for target quality."
+    ]
   },
   {
-    title:"Hernkyn Pioneers · Pan-spectral Lockons",
-    meta:"<b>3×</b> · 3 models · 90 / 90 / 100 pts",
-    role:"Mounted · Hernkyn · Farseekers upgrade",
+    title:"Hernkyn Pioneers",
+    meta:"<b>2×</b> · 3 models · 80 pts",
+    role:"Mounted utility · Recon / scoring",
     stats:[["M","12″"],["T","6"],["Sv","4+"],["W","3"],["Ld","7+"],["OC","2"]],
-    wargear:[
-      "Each unit: 3× Bolt revolver",
-      "Each unit: 3× Bolt shotgun",
-      "Each unit: 3× Magna-coil autocannon",
-      "Each unit: 1× HYLas rotary cannon",
-      "Each unit: 3× Plasma knife",
-      "Each unit: Pan-spectral Lockons"
-    ],
+    loadout:["Each unit: 3× Bolt revolver","Each unit: 3× Bolt shotgun","Each unit: 1× HYLas rotary cannon","Each unit: 3× Magna-coil autocannon","Each unit: 1× Panspectral Scanner","Each unit: 1× Rollbar Searchlight","Each unit: 3× Plasma knife"],
     weapons:[
       ["Bolt revolver","12″","1","4+","5","0","1",["Pistol"]],
       ["Bolt shotgun","18″","2","4+","5","0","1",["Assault"]],
@@ -397,110 +434,72 @@ const units = [
       ["Plasma knife","Melee","2","4+","4","-2","1",[]]
     ],
     abilities:[
-      "<b>CORE:</b> Scouts 9″.",
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Outflanking Mag-riders:</b> At the end of your opponent’s turn, if this unit is wholly within 9″ of one or more battlefield edges and not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves.",
-      "<b>Pan-spectral Lockons:</b> In your Shooting phase, you can select one visible enemy unit within 12″ of this unit. That enemy unit is spotted. While a unit is spotted, that unit has +3″ detection range.",
-      "<b>Farseekers — Eye of the Hunt:</b> Friendly HERNKYN units’ ranged attacks that target a unit within 12″ have +1 to hit rolls."
-    ],
-    keywords:"MOUNTED, GRENADES, FLY, HERNKYN, PIONEERS · LEAGUES OF VOTANN"
+      "Scouts 9″ and Outflanking Mag-riders.",
+      "Panspectral Scanner / Rollbar Searchlight are included in this loadout.",
+      "Use for screens, angles, early scoring and late objective touches."
+    ]
   },
   {
-    title:"Hernkyn Yaegirs · Shroudwërke Talismans",
-    meta:"<b>1×</b> · 10 models · 105 pts",
-    role:"Infantry · Hernkyn · Farseekers upgrade",
+    title:"Hernkyn Yaegirs",
+    meta:"<b>1×</b> · 10 models · 90 pts",
+    role:"Infiltrators · Screen",
     stats:[["M","6″"],["T","5"],["Sv","5+"],["W","1"],["Ld","7+"],["OC","1"]],
-    wargear:[
-      "Yaegir Theyn: Bolt revolver, Plasma knife",
-      "7× Bolt revolver",
-      "9× Plasma knife",
-      "1× APM launcher",
-      "1× Magna-coil rifle",
-      "Shroudwërke Talismans"
-    ],
+    loadout:["Theyn: Bolt revolver, Close combat weapon, Plasma knife","7× Bolt revolver, Close combat weapon, Plasma knife","1× APM launcher","1× Magna-coil rifle"],
     weapons:[
       ["APM launcher","24″","1","4+","6","-2","D6",["Anti-Monster 3+","Anti-Vehicle 3+"]],
       ["Bolt revolver","12″","1","4+","5","0","1",["Pistol"]],
-      ["Bolt shotgun","18″","2","4+","5","0","1",["Assault"]],
       ["Magna-coil rifle","24″","1","4+","5","-2","2",["Ignores Cover","Precision"]],
-      ["Plasma knife","Melee","2","4+","4","-2","1",[]]
+      ["Plasma knife","Melee","2","4+","4","-2","1",[]],
+      ["Close combat weapon","Melee","1","4+","3","0","1",[]]
     ],
     abilities:[
-      "<b>CORE:</b> Infiltrators.",
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Pragmatic Hunters:</b> Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9″ of this unit, it can make a Normal move of up to D6″.",
-      "<b>Shroudwërke Talismans:</b> This unit has -3″ detection range.",
-      "<b>Farseekers — Eye of the Hunt:</b> Friendly HERNKYN units’ ranged attacks that target a unit within 12″ have +1 to hit rolls."
-    ],
-    keywords:"INFANTRY, GRENADES, HERNKYN, YAEGIRS · LEAGUES OF VOTANN"
-  },
-  {
-    title:"Kapricus Defenders",
-    meta:"<b>2×</b> · 1 model each · 65 pts",
-    role:"Vehicle · Fly · Hernkyn",
-    stats:[["M","12″"],["T","7"],["Sv","4+"],["W","7"],["Ld","7+"],["OC","2"],["DD","1"]],
-    wargear:["Each: Armoured hull","Each: HYLas rotary cannon","Each: Twin magna-coil autocannon","Each: Smoke Launcher"],
-    weapons:[
-      ["HYLas rotary cannon","24″","6","4+","6","-1","2",["Sustained Hits 1"]],
-      ["Twin magna-coil autocannon","24″","3","4+","7","-1","2",["Twin-linked"]],
-      ["Armoured hull","Melee","3","4+","6","0","1",[]]
-    ],
-    abilities:[
-      "<b>CORE:</b> Deadly Demise 1, Scouts 9″.",
-      "<b>FACTION:</b> Prioritised Efficiency.",
-      "<b>Opportunistic Manoeuvre:</b> In your Shooting phase, after this unit has shot, it can make a Normal move of up to D6″. If it does, until the end of the turn, this unit is not eligible to declare a charge.",
-      "<b>Smoke Launcher:</b> The bearer has the SMOKE keyword.",
-      "<b>Farseekers — Eye of the Hunt:</b> Friendly HERNKYN units’ ranged attacks that target a unit within 12″ have +1 to hit rolls."
-    ],
-    keywords:"VEHICLE, FLY, HERNKYN, KAPRICUS, DEFENDERS · LEAGUES OF VOTANN"
+      "Infiltrators.",
+      "Pragmatic Hunters: once per turn, when an enemy unit ends a Normal/Advance/Fall Back move within 9″, this unit can make a Normal move up to D6″.",
+      "Role: forward screen, expansion/objective pressure, and bait for enemy movement into Hekaton / Thunderkyn lanes."
+    ]
   }
 ];
 
+function esc(s){return String(s)}
 function weaponCard(w){
   const [name,rng,a,skill,s,ap,d,kw]=w;
-  const keys=(kw&&kw.length)?kw.map(k=>`<span>${k}</span>`).join(""):`<span>No extra keywords</span>`;
+  const keys=(kw&&kw.length)?kw.map(k=>`<span>${esc(k)}</span>`).join(""):`<span>No extra keywords</span>`;
   const empty=(!kw||!kw.length)?" empty":"";
   return `
   <div class="weapon-card">
-    <div class="weapon-name">${name}</div>
+    <div class="weapon-name">${esc(name)}</div>
     <div class="weapon-profile">
-      <div><b>RNG</b><span>${rng}</span></div>
-      <div><b>A</b><span>${a}</span></div>
-      <div><b>SKL</b><span>${skill}</span></div>
-      <div><b>S</b><span>${s}</span></div>
-      <div><b>AP</b><span>${ap}</span></div>
-      <div><b>D</b><span>${d}</span></div>
+      <div><b>RNG</b><span>${esc(rng)}</span></div>
+      <div><b>A</b><span>${esc(a)}</span></div>
+      <div><b>SKL</b><span>${esc(skill)}</span></div>
+      <div><b>S</b><span>${esc(s)}</span></div>
+      <div><b>AP</b><span>${esc(ap)}</span></div>
+      <div><b>D</b><span>${esc(d)}</span></div>
     </div>
     <div class="weapon-keywords${empty}">${keys}</div>
   </div>`;
 }
-
 function renderUnits(){
   document.getElementById("unitList").innerHTML = units.map(u=>`
     <details class="unit" open>
-      <summary><span class="unit-title">${u.title}</span><span class="unit-meta">${u.meta}</span></summary>
+      <summary><span class="unit-title">${esc(u.title)}</span><span class="unit-meta">${u.meta}</span></summary>
       <div class="unit-body">
-        <div class="role-line"><span class="role">${u.role}</span></div>
-        <div class="stat-grid">${u.stats.map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div>
-
-        <h4>Selected wargear</h4>
-        <div class="chips">${u.wargear.map(x=>`<span class="chip wargear">${x}</span>`).join("")}</div>
-
+        <div class="role-line"><span class="role">${esc(u.role)}</span></div>
+        ${u.enhancementName ? `<div class="enhancement-box"><b>Enhancement: ${esc(u.enhancementName)}</b><span>${u.enhancementText}</span></div>` : ``}
+        <div class="stat-grid">${u.stats.map(x=>`<div><b>${esc(x[0])}</b><span>${esc(x[1])}</span></div>`).join("")}</div>
+        <h4>Loadout</h4>
+        <div class="chips">${u.loadout.map(x=>`<span class="chip${/Oathbound|Iron Ambassador/.test(x) ? ' hot' : ''}">${esc(x)}</span>`).join("")}</div>
         <h4>Weapons</h4>
         <div class="weapon-list">${u.weapons.map(weaponCard).join("")}</div>
-
-        <h4>Rules / abilities</h4>
+        <h4>Abilities / play notes</h4>
         <ul class="abilities">${u.abilities.map(x=>`<li>${x}</li>`).join("")}</ul>
-
-        <h4>Keywords</h4>
-        <div class="chips"><span class="chip">${u.keywords}</span></div>
       </div>
     </details>
   `).join("");
 }
 renderUnits();
 
-const KEY='lov_need_farseekers_v7_kahl_loadout_fixed';
+const KEY='gnomez_needgaard_covenant_v1';
 const state=JSON.parse(localStorage.getItem(KEY)||'{}');
 function save(){localStorage.setItem(KEY,JSON.stringify(state));}
 
